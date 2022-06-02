@@ -5,14 +5,16 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import Finance from './service/finance';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+const finance = new Finance();
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <App finance={finance}/>
     </Provider>
   </React.StrictMode>
 );
