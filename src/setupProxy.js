@@ -4,14 +4,14 @@ module.exports = function(app) {
     app.use(
         '/oauth',
         createProxyMiddleware({
-            target: 'https://openapi.openbanking.or.kr',
+            target: 'https://testapi.openbanking.or.kr',
             changeOrigin: true,
         })
     );
     app.use(
         '/v2.0',
         createProxyMiddleware({
-            target: 'https://openapi.openbanking.or.kr',
+            target: 'https://testapi.openbanking.or.kr',
             changeOrigin: true,
         })
     );
