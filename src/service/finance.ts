@@ -1,15 +1,18 @@
 import axios from 'axios';
 
 export default class Finance{
-    auth() {
+    
+    // 사용자 인증
+    authorize() {
         const url = "/oauth/2.0/authorize?response_type=code&client_id=43153c76-2bbb-40ac-9560-db57b5979325&redirect_uri=http://localhost:3000&scope=login inquiry transfer&client_info=test&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY&auth_type=0&cellphone_cert_yn=Y&authorized_cert_yn=Y&account_hold_auth_yn=N&register_info=A";
         window.open(url, "_blank");
     };
 
-    createToken(AUTH_CODE: string) {        
+    // 토큰 발급
+    generateToken(ACCESS_CODE: string) {        
         return axios.post('/oauth/2.0/token',
             new URLSearchParams({
-                'code': AUTH_CODE,
+                'code': ACCESS_CODE,
                 'client_id': '43153c76-2bbb-40ac-9560-db57b5979325',
                 'client_secret': '2813a5cf-fcb2-4a44-ae29-a3ec66dedc8d',
                 'redirect_uri': 'http://localhost:3000',
@@ -24,24 +27,35 @@ export default class Finance{
         )
     };
 
-    userInfoCheck(ACCESS_TOKEN: string, USER_SEQ_NO: string) {
-        return axios.get(`/v2.0/user/me?user_seq_no=${USER_SEQ_NO}`, {
+    // 사용자 정보 조회
+    userInfoCheck(USER_SEQ_NO: string, ACCESS_TOKEN: string) {
+        return axios.get('/v2.0/user/me', {
+            params: {
+                'user_seq_no': USER_SEQ_NO
+            },
             headers: {
-                'Authorization': `Bearer ${ACCESS_TOKEN}`,
+                'Authorization': 'Bearer '+ ACCESS_TOKEN,
             }
         })
     };
 
-    test() {
-        return axios.get('/v2.0/user/me', {
+    // 거래 내역 조회
+    transactionDetails(ACCESS_TOKEN: string, RANDOM_NUM: string, FINTECH_USE_NUM: string) {
+        return axios.get('/v2.0/account/transaction_list/fin_num', {
             params: {
-                'user_seq_no': '1101007181'
+                // 은행거래고유번호 = 기관고유번호 + U + 기간부여번호(9자리 난수 중복x)
+                'bank_tran_id': 'M202201064U'+ RANDOM_NUM,
+                'fintech_use_num': FINTECH_USE_NUM,
+                'inquiry_type': 'A',
+                'inquiry_base': 'D',
+                'from_date': '20220503',
+                'to_date': '20220603',
+                'sort_order': 'D',
+                'tran_dtime': '20220603234400',
             },
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAxMDA3MTgxIiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2NjIwMDMxODUsImp0aSI6IjFlOGUwOWUzLWIzYTAtNGExNy1iZDU4LWJkZDNkMjEyMzVmOSJ9.2AEIcAEz171aR-Z-X69rt9dzgSkjBZ1UA0O6sfBuzC4'
+                'Authorization': 'Bearer ' + ACCESS_TOKEN
             }
         })
-            .then(res => console.log(res))
-            .catch(error => console.log(error));
     };
 };
