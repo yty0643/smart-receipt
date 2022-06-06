@@ -20,9 +20,10 @@ const Test = ({ finance }: { finance: Finance }) => {
         };
         finance.generateToken(access_code)
             .then(res => {
-                if ('rsp_message' in res.data)
+                if (res.data.rsp_code != 'A0000')
                     throw new Error(res.data.rsp_message);
                 
+                console.log(res);
                 const now = new Date();
                 const expire = new Date().setDate(now.getDate() + (res.data.expires_in / 60 / 60 / 24));
 
@@ -43,6 +44,10 @@ const Test = ({ finance }: { finance: Finance }) => {
         };
         finance.userInfoCheck(user_seq_no, access_token)
             .then(res => {
+                if (res.data.rsp_code != 'A0000')
+                    throw new Error(res.data.rsp_message);
+                
+                console.log(res);
                 setFintech_use_num(res.data.res_list[1].fintech_use_num);
                 window.localStorage.setItem('SR_fintech_use_num', res.data.res_list[0].fintech_use_num);
             })
@@ -57,6 +62,10 @@ const Test = ({ finance }: { finance: Finance }) => {
         const random = Math.floor((Math.random() * (999999999 - 0) + 0)).toString().padStart(9, '0');
         finance.transactionDetails(access_token, random, fintech_use_num)
             .then(res => {
+                if (res.data.rsp_code != 'A0000')
+                    throw new Error(res.data.rsp_message);
+                
+                console.log(res);
                 setUserData(res.data);
             })
             .catch(error => console.log(error));
@@ -66,11 +75,6 @@ const Test = ({ finance }: { finance: Finance }) => {
         if (!window.location.search) return;
         setAccess_code(window.location.search.split('=')[1].split('&')[0]);
     }, [window.location.search]);
-
-    useEffect(() => {
-        const now = new Date();
-        const expire = new Date().setDate(now.getDate() + 90);
-    }, [userData]);
     
     return (
         <div>

@@ -1,16 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import styles from './App.module.css';
 import Finance from './service/finance';
-import Test from './components/test';
-
+import ThemeBtn from './components/theme_btn/theme_btn';
+import LogoBtn from './components/logo_btn/logo_btn';
 function App({ finance }: { finance: Finance }) {
   
 
   return (
     <div className={styles.app}>
-      <Test finance={finance} />
+      <header>
+        <LogoBtn />
+        <ThemeBtn />
+      </header>
     </div>
   );
 };
