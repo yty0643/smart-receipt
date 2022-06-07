@@ -13,8 +13,8 @@ export default class Finance{
         return axios.post('/oauth/2.0/token',
             new URLSearchParams({
                 'code': ACCESS_CODE,
-                'client_id': '43153c76-2bbb-40ac-9560-db57b5979325',
-                'client_secret': '2813a5cf-fcb2-4a44-ae29-a3ec66dedc8d',
+                'client_id': process.env.REACT_APP_CLIENT_ID,
+                'client_secret': process.env.REACT_APP_CLIENT_SECRET,
                 'redirect_uri': 'http://localhost:3000',
                 'grant_type': 'authorization_code'
             }),
@@ -44,7 +44,8 @@ export default class Finance{
         return axios.get('/v2.0/account/transaction_list/fin_num', {
             params: {
                 // 은행거래고유번호 = 기관고유번호 + U + 기간부여번호(9자리 난수 중복x)
-                'bank_tran_id': 'M202201064U'+ RANDOM_NUM,
+                // 나중에 조회 일자도 파라미터로 받는거 수정해야함.
+                'bank_tran_id': process.env.REACT_APP_BANK_TRAN_ID + RANDOM_NUM,
                 'fintech_use_num': FINTECH_USE_NUM,
                 'inquiry_type': 'A',
                 'inquiry_base': 'D',
