@@ -4,7 +4,18 @@ export default class Finance{
     
     // 사용자 인증
     authorize() {
-        const url = "/oauth/2.0/authorize?response_type=code&client_id=43153c76-2bbb-40ac-9560-db57b5979325&redirect_uri=http://localhost:3000&scope=login inquiry transfer&client_info=test&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY&auth_type=0&cellphone_cert_yn=Y&authorized_cert_yn=Y&account_hold_auth_yn=N&register_info=A";
+        const url =
+            `/oauth/2.0/authorize?` +
+            `response_type=code&` +
+            `client_id=${process.env.REACT_APP_CLIENT_ID}&` +
+            `redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&` +
+            `scope=login inquiry transfer&client_info=test&` +
+            `state=b80BLsfigm9OokPTjy03elbJqRHOfGSY&` + //난수 32비트
+            `auth_type=0&` +
+            `cellphone_cert_yn=Y&` +
+            `authorized_cert_yn=Y&` +
+            `account_hold_auth_yn=N&` +
+            `register_info=A`;
         window.open(url, "_blank");
     };
 
@@ -15,7 +26,7 @@ export default class Finance{
                 'code': ACCESS_CODE,
                 'client_id': process.env.REACT_APP_CLIENT_ID,
                 'client_secret': process.env.REACT_APP_CLIENT_SECRET,
-                'redirect_uri': 'http://localhost:3000',
+                'redirect_uri': process.env.REACT_APP_REDIRECT_URL,
                 'grant_type': 'authorization_code'
             }),
             {

@@ -6,5 +6,6 @@ declare namespace NodeJS {
         readonly REACT_APP_CLIENT_ID: string;
         readonly REACT_APP_CLIENT_SECRET: string;
         readonly REACT_APP_BANK_TRAN_ID: string;
+        readonly REACT_APP_REDIRECT_URL: string;
     }
 }
