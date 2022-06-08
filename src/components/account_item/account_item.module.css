@@ -1,0 +1,41 @@
+.card{
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 16rem;
+    height: 10rem;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem 2rem 1rem;
+    border: 1px solid rgb(169, 173, 177);
+    border-radius: 10px;
+    background: linear-gradient(rgb(245, 245, 245), rgb(222, 224, 230));
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 3px 4px 10px -5px #7b7b7b;
+    transition: all ease-in 300ms;
+}
+.card.focus{
+    transform: scale(1.2);
+    margin: 0 -2rem;
+}
+.card.dark{
+    background: linear-gradient(rgb(61, 62, 63), rgb(76, 77, 80));
+    box-shadow: 3px 4px 10px -5px #000000;
+}
+
+.img{
+    width: 4rem;
+    margin: -15px;
+}
+
+.name,
+.num{
+    font-weight: 100;
+    font-size: 0.9rem;
+    color: rgb(141, 141, 141);
+}
+.bank{
+    font-weight: 500;
+    color: rgb(208, 203, 167);
+    margin-bottom: auto;
+    margin-left: auto;
+}
