@@ -1,15 +1,18 @@
 import { faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import { setAccount } from '../../features/selectedAcc/selectedAccSlice';
 import AccountItem from '../account_item/account_item';
 import styles from './account_list.module.css';
 
 const Account_list = ({ account_list }: { account_list: object[] }) => {
+    const dispatch = useDispatch();
     const theme = useSelector((state: RootState) => (state.theme.isActive));
     const conRef = useRef<HTMLDivElement>(null);
     const [focusIdx, setFocusIdx] = useState<number>(0);
+
 
     const right = () => {
         if (focusIdx == account_list.length - 1) {
@@ -45,6 +48,10 @@ const Account_list = ({ account_list }: { account_list: object[] }) => {
             return idx - 1;
         });
     }
+
+    useEffect(() => {
+        dispatch(setAccount(account_list[focusIdx]));
+    }, [focusIdx]);
 
     return (
         <div className={styles.section}>
