@@ -6,18 +6,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from './app/store';
 import SignInBtn from './components/sign_in_btn/sign_in_btn';
 import AccountList from './components/account_list/account_list';
+import AccountDetail from './components/account_detail/account_detail';
 
 function App({ finance }: { finance: Finance }) {
   const theme = useSelector((state: RootState) => (state.theme.isActive));
-  const [access_code, setAccess_code] = useState<string>();
-  const [user_seq_no, setUser_seq_no] = useState<string | null>(window.localStorage.getItem('SR_user_seq_no'));
-  const [access_token, setAccess_token] = useState<string | null>(window.localStorage.getItem('SR_access_token'));
-  const [expire, setExpire] = useState<string | null>(window.localStorage.getItem('SR_expires_in'));
-  const [account_list, setAccount_list] = useState<object[] | null>(JSON.parse(window.localStorage.getItem('SR_account_list') || "null"));
-  const [fintech_use_num, setFintech_use_num] = useState<string | null>(window.localStorage.getItem('SR_fintech_use_num'));
-  const [userData, setUserData] = useState<object>({});
 
-  const finLogic = () => {
+  const finLogic = (access_code: string) => {
     finance
       .generateToken(access_code!)
       .then(res => {
@@ -29,11 +23,8 @@ function App({ finance }: { finance: Finance }) {
         }
         const now = new Date();
         const expire = new Date().setDate(now.getDate() + (res.data.expires_in / 60 / 60 / 24));
-        setUser_seq_no(res.data.user_seq_no); // 사용자 고유번호
         window.localStorage.setItem('SR_user_seq_no', res.data.user_seq_no);
-        setAccess_token(res.data.access_token); // 토큰
         window.localStorage.setItem('SR_access_token', res.data.access_token);
-        setExpire(expire.toString()); // 토큰 만료일자
         window.localStorage.setItem('SR_expires_in', expire.toString());
         return {
           user_seq_no: res.data.user_seq_no,
@@ -44,35 +35,17 @@ function App({ finance }: { finance: Finance }) {
       .then(res => {
         if (res.data.rsp_code != 'A0000')
           throw new Error(res.data.rsp_message);
-      
-        setAccount_list(res.data.res_list);
+
         window.localStorage.setItem('SR_account_list', JSON.stringify(res.data.res_list));
-        setFintech_use_num(res.data.res_list[1].fintech_use_num);
         window.localStorage.setItem('SR_fintech_use_num', res.data.res_list[1].fintech_use_num);
       })
   };
-  
-  // const transactionDetails = () => {
-  //   const random = Math.floor((Math.random() * (999999999 - 0) + 0)).toString().padStart(9, '0');
-  //   finance.transactionDetails(access_token!, random, fintech_use_num!)
-  //     .then(res => {
-  //       if (res.data.rsp_code != 'A0000')
-  //         throw new Error(res.data.rsp_message);
-  //       setUserData(res.data);
-  //     })
-  //     .catch(error => console.log(error));
-  // };
 
   useEffect(() => {
     if (!window.location.search) return;
-    setAccess_code(window.location.search.split('=')[1].split('&')[0]);
+    finLogic(window.location.search.split('=')[1].split('&')[0]);
     window.location.search = "";
   }, [window.location.search]);
-  
-  useEffect(() => {
-    if (!access_code) return;
-    finLogic();
-  }, [access_code]);
   
   return (
     <div className={`${styles.app} ${theme && styles.dark}`}>
@@ -87,7 +60,10 @@ function App({ finance }: { finance: Finance }) {
       </section>
       <section className={`${styles.accountSec} ${theme && styles.dark}`}>
         <p className={`${styles.sectionTitle} ${theme && styles.dark}`}>계좌 선택</p>
-        {account_list && <AccountList account_list={account_list} />}
+        <AccountList />
+      </section>
+      <section className={`${styles.detailSec} ${theme && styles.dark}`}>
+        <AccountDetail finance={finance}/>
       </section>
     </div>
   );

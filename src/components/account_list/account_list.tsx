@@ -7,14 +7,15 @@ import { setAccount } from '../../features/selectedAcc/selectedAccSlice';
 import AccountItem from '../account_item/account_item';
 import styles from './account_list.module.css';
 
-const Account_list = ({ account_list }: { account_list: object[] }) => {
-    const dispatch = useDispatch();
+const Account_list = ({}) => {
     const theme = useSelector((state: RootState) => (state.theme.isActive));
-    const conRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
+    const [account_list] = useState<object[] | null>(JSON.parse(window.localStorage.getItem('SR_account_list') || "null"));
     const [focusIdx, setFocusIdx] = useState<number>(0);
-
+    const conRef = useRef<HTMLDivElement>(null);
 
     const right = () => {
+        if (!account_list) return;
         if (focusIdx == account_list.length - 1) {
             conRef.current?.scrollTo({
                 left: 0,
@@ -31,6 +32,7 @@ const Account_list = ({ account_list }: { account_list: object[] }) => {
     }
 
     const left = () => {
+        if (!account_list) return;
         if (focusIdx == 0) {
             conRef.current?.scrollTo({
                 left: 1000,
@@ -50,6 +52,7 @@ const Account_list = ({ account_list }: { account_list: object[] }) => {
     }
 
     useEffect(() => {
+        if (!account_list) return;
         dispatch(setAccount(account_list[focusIdx]));
     }, [focusIdx]);
 
