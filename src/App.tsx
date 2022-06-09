@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import Finance from './service/finance';
 import ThemeBtn from './components/theme_btn/theme_btn';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './app/store';
 import SignInBtn from './components/sign_in_btn/sign_in_btn';
 import AccountList from './components/account_list/account_list';
-import AccountDetail from './components/account_detail/account_detail';
+import { setTranList } from './features/tran_list/tran_list_slice';
+import Chart from './components/chart/chart';
 
 function App({ finance }: { finance: Finance }) {
+  const dispatch = useDispatch();
   const theme = useSelector((state: RootState) => (state.theme.isActive));
+  const account:any = useSelector((state: RootState) => (state.selectedAcc.account));
+  const [access_token] = useState<string | null>(window.localStorage.getItem('SR_access_token'));
 
   const finLogic = (access_code: string) => {
     finance
@@ -46,6 +50,18 @@ function App({ finance }: { finance: Finance }) {
     finLogic(window.location.search.split('=')[1].split('&')[0]);
     window.location.search = "";
   }, [window.location.search]);
+
+  useEffect(() => {
+    if (Object.keys(account).length == 0) return;
+    const random = Math.floor((Math.random() * (999999999 - 0) + 0)).toString().padStart(9, '0');
+    finance.transactionDetails(access_token!, random, account.fintech_use_num)
+      .then(res => {
+        if (res.data.rsp_code != 'A0000')
+          throw new Error(res.data.rsp_message);
+        dispatch(setTranList(res.data.res_list));
+      })
+      .catch(error => console.log(error));
+  }, [account]);
   
   return (
     <div className={`${styles.app} ${theme && styles.dark}`}>
@@ -63,7 +79,7 @@ function App({ finance }: { finance: Finance }) {
         <AccountList />
       </section>
       <section className={`${styles.detailSec} ${theme && styles.dark}`}>
-        <AccountDetail finance={finance}/>
+        <Chart />
       </section>
     </div>
   );
