@@ -6,7 +6,7 @@
     transition: all ease-in 100ms;
     opacity: 0.7;
 }
-.bar:hover{
+.bar.hover{
     opacity: 1;
     border: 1px solid black;
 }
@@ -28,7 +28,7 @@
     opacity: 0;
     pointer-events: none;
 }
-.detail.active{
+.detail.hover{
     transform: scale(1);
     opacity: 1;
 }

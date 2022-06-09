@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeReducer from '../features/theme/themeSlice';
+import themeReducer from '../features/theme/theme_slice';
 import seletedAccReducer from '../features/selected_acc/selected_acc_slice';
 import tranListReducer from '../features/tran_list/tran_list_slice';
 

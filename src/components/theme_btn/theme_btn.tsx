@@ -4,7 +4,7 @@ import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../../app/store";
 import { RootState } from "../../app/store";
-import { toggle } from '../../features/theme/themeSlice';
+import { toggle } from '../../features/theme/theme_slice';
 import styles from './theme_btn.module.css';
 
 const ThemeBtn = () => {

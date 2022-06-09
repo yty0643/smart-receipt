@@ -10,19 +10,21 @@ const Chart = ({ }) => {
 
     useEffect(() => { 
         if (!tranList) return;
-        setMax((max) => {
+        setMax(() => {
+            let max = 0;
             tranList.map((item) => {
-                max = max < Number(item.tran_amt) ? Number(item.tran_amt) : max;
+                if (!item.hide)
+                    max = max < Number(item.tran_amt) ? Number(item.tran_amt) : max;
             })
             return max;
         })
     }, [tranList]);
-
+    console.log(Math.ceil(Number(tranList[2].tran_amt) / max * 100));
     return (
         <div className={styles.section}>
             <div className={styles.chart}>
                 {tranList && tranList.map(item => (
-                    <Bar item={item} max={max}/>
+                    !item.hide && <Bar item={item} max={max} />
                 ))}
             </div>
         </div>

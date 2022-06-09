@@ -1,0 +1,22 @@
+.list{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 15rem;
+    padding: 0 1rem;
+    overflow-y: scroll;
+}
+
+.item{
+    font-size: 0.6rem;
+    color: rgb(96, 96, 96);
+    transition: all ease-in 100ms;
+}
+
+.item.hover{
+    transform: scale(1.1);
+}
+
+.item.hide{
+    opacity: 0.5;
+}

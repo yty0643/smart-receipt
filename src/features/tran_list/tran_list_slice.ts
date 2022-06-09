@@ -9,6 +9,9 @@ export interface ITranItem{
     tran_date: string,
     tran_time: string,
     tran_type: string,
+    key: number,
+    hover: boolean,
+    hide: boolean,
 }
 
 export interface ITranList{
@@ -26,8 +29,23 @@ export const tranListSlice = createSlice({
         setTranList: ((state, action) => {
             state.list = action.payload;
         }),
+        mouseEnter: ((state, action) => {
+            const temp:ITranItem[] = [...state.list]
+            temp[action.payload].hover = true;
+            state.list = temp;
+        }),
+        mouseLeave: ((state, action) => {
+            const temp:ITranItem[] = [...state.list]
+            temp[action.payload].hover = false;
+            state.list = temp;
+        }),
+        mouseClick: ((state, action) => {
+            const temp:ITranItem[] = [...state.list]
+            temp[action.payload].hide = !temp[action.payload].hide;
+            state.list = temp;
+        }),
     },
-})
+});
 
-export const { setTranList } = tranListSlice.actions;
+export const { setTranList, mouseEnter, mouseLeave, mouseClick } = tranListSlice.actions;
 export default tranListSlice.reducer;

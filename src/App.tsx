@@ -8,6 +8,7 @@ import SignInBtn from './components/sign_in_btn/sign_in_btn';
 import AccountList from './components/account_list/account_list';
 import { setTranList } from './features/tran_list/tran_list_slice';
 import Chart from './components/chart/chart';
+import TranList from './components/tran_list/tran_list';
 
 function App({ finance }: { finance: Finance }) {
   const dispatch = useDispatch();
@@ -58,7 +59,17 @@ function App({ finance }: { finance: Finance }) {
       .then(res => {
         if (res.data.rsp_code != 'A0000')
           throw new Error(res.data.rsp_message);
-        dispatch(setTranList(res.data.res_list));
+        
+        const temp:any = [];
+        res.data.res_list.map((item:any, index:number) => {
+          temp.push({
+            ...item,
+            key:index,
+            hover: false,
+            hide: false,
+          })
+        })
+        dispatch(setTranList(temp));
       })
       .catch(error => console.log(error));
   }, [account]);
@@ -79,6 +90,7 @@ function App({ finance }: { finance: Finance }) {
         <AccountList />
       </section>
       <section className={`${styles.detailSec} ${theme && styles.dark}`}>
+        <TranList />
         <Chart />
       </section>
     </div>
