@@ -19,7 +19,6 @@ const Chart = ({ }) => {
             return max;
         })
     }, [tranList]);
-    console.log(Math.ceil(Number(tranList[2].tran_amt) / max * 100));
     return (
         <div className={styles.section}>
             <div className={styles.chart}>

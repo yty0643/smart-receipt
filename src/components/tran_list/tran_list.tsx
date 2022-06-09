@@ -1,3 +1,5 @@
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
@@ -19,15 +21,23 @@ const TranList = () => {
         dispatch(mouseClick(item.key));
     }
     return (
-        <div className={styles.list}>
-            {tranList.map(item => (
-                <p
-                    className={`${styles.item} ${item.hover && styles.hover} ${item.hide && styles.hide}`}
-                    onClick={() => { onClick(item) }}
-                    onMouseEnter={() => { onMouseEnter(item) }}
-                    onMouseLeave={() => { onMouseLeave(item) }}>
-                    {item.print_content}</p>
-            ))}
+        <div className={styles.section}>
+            <button className={styles.upBtn}>
+                <FontAwesomeIcon icon={faAngleUp} />
+            </button>
+            <div className={styles.list}>
+                {tranList.map(item => (
+                    <p
+                        className={`${styles.item} ${item.hover && styles.hover} ${item.hide && styles.hide}`}
+                        onClick={() => { onClick(item) }}
+                        onMouseEnter={() => { onMouseEnter(item) }}
+                        onMouseLeave={() => { onMouseLeave(item) }}>
+                        {item.print_content}</p>
+                ))}
+            </div>
+            <button className={styles.downBtn}>
+                <FontAwesomeIcon icon={faAngleDown} />
+            </button>
         </div>
     );
 };

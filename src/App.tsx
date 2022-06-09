@@ -76,7 +76,7 @@ function App({ finance }: { finance: Finance }) {
   
   return (
     <div className={`${styles.app} ${theme && styles.dark}`}>
-      <header className={styles.header}>
+      <header className={`${styles.header} ${theme && styles.dark}`}>
         <p className={`${styles.title} ${theme && styles.dark}`}>Smart Receipt</p>
         <ThemeBtn />
       </header>

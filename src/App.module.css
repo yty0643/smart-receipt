@@ -27,6 +27,9 @@
     height: 5rem;
     padding: 0 20%;
 }
+.header.dark{
+    border-bottom: 0.5px solid rgb(82, 82, 82);
+}
 
 .signInSec{
     display: flex;
@@ -36,10 +39,8 @@
     background-color: rgb(85, 95, 115);
     width: 100%;
     padding: 4rem 0;
-    margin-bottom: 2rem;
 }
 .signInSec.dark{
-    border-top: 0.5px solid rgb(82, 82, 82);
     border-bottom: 0.5px solid rgb(82, 82, 82);
     background-color: transparent;
 }
@@ -60,7 +61,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding-bottom: 6rem;
+    padding: 4rem 0 7.5rem 0;
 }
 .accountSec.dark{
     border-bottom: 0.5px solid rgb(82, 82, 82);
@@ -80,7 +81,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding-bottom: 6rem;
+    padding: 4rem 0 7.5rem 0;
 }
 
 

@@ -1,14 +1,24 @@
 .bar{
     position: relative;
-    width: 7px;
-    margin-right: 3px;
+    width: 10px;
+    border: 1px solid white;
+    border-bottom: none;
     background-color: rgb(103, 143, 243);
     transition: all ease-in 100ms;
     opacity: 0.7;
 }
+.bar.dark{
+    border: 1px solid rgb(38, 38, 41);
+    border-bottom: none;
+}
 .bar.hover{
     opacity: 1;
     border: 1px solid black;
+    border-bottom: none;
+}
+.bar.dark.hover{
+    border: 1px solid white;
+    border-bottom: none;
 }
 
 .detail{

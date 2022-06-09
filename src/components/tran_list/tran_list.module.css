@@ -1,15 +1,22 @@
+.section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 16rem;
+}
 .list{
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 15rem;
     padding: 0 1rem;
     overflow-y: scroll;
 }
 
 .item{
     font-size: 0.6rem;
-    color: rgb(96, 96, 96);
+    color: rgb(136, 136, 136);
     transition: all ease-in 100ms;
 }
 
@@ -18,5 +25,15 @@
 }
 
 .item.hide{
-    opacity: 0.5;
+    opacity: 0.3;
+}
+
+.upBtn{
+    pointer-events: none;
+    padding-bottom: 0.5rem;
+}
+.downBtn{
+    pointer-events: none;
+
+    padding-top: 0.5rem;
 }

@@ -6,6 +6,7 @@ import styles from './bar.module.css';
 
 const Bar = ({ item, max }: { item: ITranItem, max: number }) => {
     const dispatch = useDispatch();
+    const theme = useSelector((state: RootState) => (state.theme.isActive))
     const tranList = useSelector((state: RootState) => (state.tranList.list));
     
     const onMouseEnter = (item: ITranItem) => {
@@ -17,7 +18,7 @@ const Bar = ({ item, max }: { item: ITranItem, max: number }) => {
     const height = Math.ceil(Number(item.tran_amt) / max * 100);
     return (
         <div
-            className={`${styles.bar} ${item.hover && styles.hover}`}
+            className={`${styles.bar} ${theme && styles.dark} ${item.hover && styles.hover}`}
             style={{
                 backgroundColor: `${item.inout_type == "입금" ? "rgb(103, 143, 243)" : "rgb(231, 115, 115)"}`,
                 height: `${height > 100 ? 100 : height}%`
