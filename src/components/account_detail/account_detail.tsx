@@ -8,7 +8,7 @@ import styles from './account_detail.module.css';
 
 
 const AccountDetail = ({ finance }: { finance: Finance }) => {
-    const account:any = useSelector((state: RootState) => (state.selectedAcc.account));
+    const account: any = useSelector((state: RootState) => (state.selectedAcc.account));
     const [access_token] = useState<string | null>(window.localStorage.getItem('SR_access_token'));
     const [tranData, setTranData] = useState<any[]>([]);
 
@@ -16,20 +16,27 @@ const AccountDetail = ({ finance }: { finance: Finance }) => {
     
     const createChart = (arr: any[]) => {
         const temp: IBar[] = [];
+
         let max: number = 0;
         arr.map((item) => {
             max = max < Number(item.tran_amt) ? Number(item.tran_amt) : max;
         })
+
         arr.map((item) => {
             temp.push({
                 bgColor: item.inout_type == "입금" ? "rgb(103, 143, 243)" : "rgb(231, 115, 115)",
                 height: Math.ceil(Number(item.tran_amt) / max * 100),
+                balance: item.after_balance_amt,
+                inout: item.inout_type,
+                content: item.print_content,
+                amount: item.tran_amt,
+                date: item.tran_date,
+                time: item.tran_time,
+                type: item.tran_type,
             });
         })
-        console.log(arr);
-        console.log(temp);
         return temp;
-    }
+    };
 
     useEffect(() => {
         if (Object.keys(account).length == 0) return;
@@ -38,18 +45,18 @@ const AccountDetail = ({ finance }: { finance: Finance }) => {
             .then(res => {
                 if (res.data.rsp_code != 'A0000')
                     throw new Error(res.data.rsp_message);
-                    setTranData(res.data.res_list);
+                setTranData(res.data.res_list);
             })
             .catch(error => console.log(error));
     }, [account])
 
-    useEffect(() => { 
+    useEffect(() => {
         if (!tranData) return;
         setChartData(createChart(tranData));
-    },[tranData])
+    }, [tranData])
 
     return (
-        <Chart chartData={chartData}/>
+        <Chart chartData={chartData} />
     );
 };
 
