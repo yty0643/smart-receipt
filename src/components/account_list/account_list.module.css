@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: start;
     width: 48rem;
-    padding: 1rem;
+    padding: 2rem 1rem;
     overflow-x: scroll;
     touch-action: none;
 }

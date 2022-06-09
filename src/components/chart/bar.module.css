@@ -1,0 +1,9 @@
+.bar{
+    width: 7px;
+    margin-right: 2px;
+    background-color: rgb(103, 143, 243);
+    transition: all ease-in 100ms;
+}
+.bar:hover{
+    opacity: 0.7;
+}
