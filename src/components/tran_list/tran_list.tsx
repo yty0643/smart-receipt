@@ -9,7 +9,7 @@ import styles from './tran_list.module.css';
 const TranList = () => {
     const dispatch = useDispatch();
     const tranList = useSelector((state: RootState) => (state.tranList.list));
-    
+    const theme = useSelector((state: RootState) => (state.theme.isActive));
     const onMouseEnter = (item:ITranItem) => {
         dispatch(mouseEnter(item.key));
     }

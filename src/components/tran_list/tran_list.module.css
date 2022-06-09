@@ -37,3 +37,8 @@
     pointer-events: none;
     padding-top: 0.5rem;
 }
+
+.upBtn.dark,
+.downBtn.dark{    
+    color:white;
+}
