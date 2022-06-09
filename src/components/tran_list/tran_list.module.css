@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-right: 3rem;
     height: 16rem;
 }
 .list{
@@ -34,6 +35,5 @@
 }
 .downBtn{
     pointer-events: none;
-
     padding-top: 0.5rem;
 }

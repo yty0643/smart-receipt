@@ -19,12 +19,20 @@ const Chart = ({ }) => {
             return max;
         })
     }, [tranList]);
+
     return (
-        <div className={styles.section}>
-            <div className={styles.chart}>
-                {tranList && tranList.map(item => (
-                    !item.hide && <Bar item={item} max={max} />
-                ))}
+        <div className={styles.chart}>
+            <div className={styles.amount}>
+                <p>{max}</p>
+                <p>{max/2}</p>
+                <p>{0}</p>
+            </div>
+            {tranList && tranList.map(item => (
+                !item.hide && <Bar item={item} max={max} />
+            ))}
+            <div className={styles.date}>
+                <p>{Number(tranList[0].tran_date)%10000/100}</p>
+                <p>{Number(tranList[tranList.length-1].tran_date)%10000/100}</p>
             </div>
         </div>
     );

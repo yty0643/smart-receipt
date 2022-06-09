@@ -1,8 +1,5 @@
-.section{
-    display: flex;
-}
-
 .chart{
+    position: relative;
     display: flex;
     align-items:flex-end;
     width: 16rem;
@@ -10,4 +7,31 @@
     border-left: 1px solid grey;
     border-bottom: 1px solid grey;
     border-radius: 0 0 0 3px;
+}
+
+.date{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color:grey;
+}
+
+.amount{
+    position: absolute;
+    top: 0;
+    right: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 100%;
+    padding-right: 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color:grey;
 }

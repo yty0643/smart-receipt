@@ -77,21 +77,26 @@ function App({ finance }: { finance: Finance }) {
   return (
     <div className={`${styles.app} ${theme && styles.dark}`}>
       <header className={`${styles.header} ${theme && styles.dark}`}>
-        <p className={`${styles.title} ${theme && styles.dark}`}>Smart Receipt</p>
+        <p className={`${styles.appTitle} ${theme && styles.dark}`}>Smart Receipt</p>
         <ThemeBtn />
       </header>
       <section className={`${styles.signInSec} ${theme && styles.dark}`}>
-        <p className={`${styles.sectionTitle}`}>금융결제원 API를 통해 계좌를 등록하고 웹에서 제공되는 서비스를 이용하세요.</p>
+        <p className={`${styles.title}`}>금융결제원 API를 통해 계좌를 등록하고 웹에서 제공되는 서비스를 이용하세요.</p>
         <p className={`${styles.description}`}>클릭시 오픈뱅킹 본인인증 페이지로 이동합니다.</p>
         <SignInBtn finance={finance} />
       </section>
       <section className={`${styles.accountSec} ${theme && styles.dark}`}>
-        <p className={`${styles.sectionTitle} ${theme && styles.dark}`}>계좌 선택</p>
+        <p className={`${styles.title} ${theme && styles.dark}`}>계좌 선택</p>
+        <p className={`${styles.description} ${theme && styles.dark}`}>localStorage에 등록된 계좌 중 하나를 선택하세요.</p>
         <AccountList />
       </section>
       <section className={`${styles.detailSec} ${theme && styles.dark}`}>
-        <TranList />
-        <Chart />
+        <p className={`${styles.title} ${theme && styles.dark}`}>거래 통계</p>
+        <p className={`${styles.description} ${theme && styles.dark}`}>선택된 계좌의 거래통계입니다.</p>
+        <div className={styles.chart1}>
+          <TranList />
+          <Chart />
+        </div>
       </section>
     </div>
   );

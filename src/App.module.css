@@ -11,11 +11,11 @@
     background-color: rgb(38, 38, 41);
 }
 
-.title{
+.appTitle{
     font-weight: 300;
     font-size: 1.5rem;
 }
-.title.dark{
+.appTitle.dark{
     color: white;
 }
 
@@ -45,7 +45,7 @@
     background-color: transparent;
 }
 
-.signInSec .sectionTitle{
+.signInSec .title{
     color: white;
     margin-bottom: 0.3rem;
 }
@@ -67,21 +67,52 @@
     border-bottom: 0.5px solid rgb(82, 82, 82);
 }
 
-.accountSec .sectionTitle{
+.accountSec .title{
     font-size: 1.5rem;
     color: rgb(85, 95, 115);
-    margin-bottom: 2rem;
+    margin-bottom: 0.3rem;
 }
-.accountSec .sectionTitle.dark{
+.accountSec .description{
+    font-size: 0.7rem;
+    margin-bottom: 1.7rem;
+}
+.accountSec .title.dark{
+    color: white;
+}
+.accountSec .description.dark{
+    font-size: 0.7rem;
     color: white;
 }
 
 .detailSec{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     padding: 4rem 0 7.5rem 0;
+}
+.detailSec .title{
+    font-size: 1.5rem;
+    color: rgb(85, 95, 115);
+    margin-bottom: 0.3rem;
+}
+.detailSec .title.dark{
+    color: white;
+}
+.detailSec .description{
+    font-size: 0.7rem;
+    margin-bottom: 1.7rem;
+}
+.detailSec .description.dark{
+    font-size: 0.7rem;
+    color: white;
+}
+
+.chart1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
