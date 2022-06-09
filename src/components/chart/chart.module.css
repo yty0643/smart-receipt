@@ -1,3 +1,7 @@
+.section{
+    display: flex;
+}
+
 .chart{
     display: flex;
     align-items:flex-end;
@@ -7,4 +11,23 @@
     border-left: 1px solid grey;
     border-bottom: 1px solid grey;
     border-radius: 0 0 0 3px;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 15rem;
+    padding-left: 3rem;
+    color: rgb(99, 99, 99);
+    font-size: 0.6rem;
+    overflow-y: scroll;
+}
+
+
+.tag{
+    transition: all ease-in 100ms;
+}
+.tag:hover{
+    transform: scale(1.1);
 }

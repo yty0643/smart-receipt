@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { setAccount } from '../../features/selectedAcc/selectedAccSlice';
+import { setAccount } from '../../features/selected_acc/selected_acc_slice';
 import AccountItem from '../account_item/account_item';
 import styles from './account_list.module.css';
 
