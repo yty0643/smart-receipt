@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import Bar from './bar';
-import styles from './chart.module.css';
+import styles from './chart_bar.module.css';
 
-const Chart = ({ }) => {
+const ChartBar = ({ }) => {
     const tranList = useSelector((state: RootState) => (state.tranList.list));
     const [max, setMax] = useState<number>(0);
     const [start, setStart] = useState<number>(0);
@@ -28,7 +28,7 @@ const Chart = ({ }) => {
             return max;
         });
     }, [tranList]);
-
+    
     return (
         <div className={styles.chart}>
             <div className={styles.amount}>
@@ -47,4 +47,4 @@ const Chart = ({ }) => {
     );
 };
 
-export default Chart;
+export default ChartBar;

@@ -7,8 +7,9 @@ import { RootState } from './app/store';
 import SignInBtn from './components/sign_in_btn/sign_in_btn';
 import AccountList from './components/account_list/account_list';
 import { setTranList } from './features/tran_list/tran_list_slice';
-import Chart from './components/chart/chart';
 import TranList from './components/tran_list/tran_list';
+import ChartBar from './components/chart_bar/chart_bar';
+import ChartLine from './components/chart_line/chart_line';
 
 function App({ finance }: { finance: Finance }) {
   const dispatch = useDispatch();
@@ -95,7 +96,8 @@ function App({ finance }: { finance: Finance }) {
         <p className={`${styles.description} ${theme && styles.dark}`}>선택된 계좌의 거래통계입니다.</p>
         <div className={styles.chart1}>
           <TranList />
-          <Chart />
+          <ChartBar />
+          <ChartLine />
         </div>
       </section>
     </div>

@@ -1,0 +1,10 @@
+.line{
+    width: 8px;
+    height: 8px;
+    margin: 1px;
+    border: 1px solid white;
+    border-bottom: none;
+    border-radius: 50%;
+    background-color: rgb(103, 143, 243);
+    /* transition: all ease-in 100ms; */
+}
