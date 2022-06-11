@@ -9,7 +9,7 @@ import AccountList from './components/account_list/account_list';
 import { setTranList } from './features/tran_list/tran_list_slice';
 import TranList from './components/tran_list/tran_list';
 import ChartBar from './components/chart_bar/chart_bar';
-import ChartLine from './components/chart_line/chart_line';
+import { setStateList } from './features/state_list/state_list_slice';
 
 function App({ finance }: { finance: Finance }) {
   const dispatch = useDispatch();
@@ -65,12 +65,14 @@ function App({ finance }: { finance: Finance }) {
         res.data.res_list.map((item:any, index:number) => {
           temp.push({
             ...item,
-            key:index,
-            hover: false,
-            hide: false,
-          })
+            tran_amt: Number(item.tran_amt),
+          });
         })
         dispatch(setTranList(temp));
+        dispatch(setStateList({
+          hover: Array(temp.length).fill(false),
+          hide: Array(temp.length).fill(false),
+        }));
       })
       .catch(error => console.log(error));
   }, [account]);
@@ -97,7 +99,7 @@ function App({ finance }: { finance: Finance }) {
         <div className={styles.chart1}>
           <TranList />
           <ChartBar />
-          <ChartLine />
+          {/* <ChartLine /> */}
         </div>
       </section>
     </div>

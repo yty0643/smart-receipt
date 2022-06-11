@@ -4,12 +4,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { setAccount } from '../../features/selected_acc/selected_acc_slice';
+import { setStateList } from '../../features/state_list/state_list_slice';
 import AccountItem from '../account_item/account_item';
 import styles from './account_list.module.css';
 
 const Account_list = ({}) => {
-    const theme = useSelector((state: RootState) => (state.theme.isActive));
     const dispatch = useDispatch();
+    const theme = useSelector((state: RootState) => (state.theme.isActive));
     const [account_list] = useState<object[] | null>(JSON.parse(window.localStorage.getItem('SR_account_list') || "null"));
     const [focusIdx, setFocusIdx] = useState<number>(0);
     const conRef = useRef<HTMLDivElement>(null);

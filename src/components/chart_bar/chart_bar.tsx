@@ -1,48 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import Bar from './bar';
 import styles from './chart_bar.module.css';
+import { mouseEnter, mouseLeave } from '../../features/state_list/state_list_slice';
 
 const ChartBar = ({ }) => {
+    const dispatch = useDispatch();
+    const theme = useSelector((state: RootState) => (state.theme.isActive))
     const tranList = useSelector((state: RootState) => (state.tranList.list));
-    const [max, setMax] = useState<number>(0);
-    const [start, setStart] = useState<number>(0);
-    const [end, setEnd] = useState<number>(0);
+    const hoverList = useSelector((state: RootState) => (state.stateList.hover));
+    const hideList = useSelector((state: RootState) => (state.stateList.hide));
+    const [heightArr, setHeightArr] = useState<number[]>([]);
+
+    const onMouseEnter = (index: number) => {
+        dispatch(mouseEnter(index));
+    };
+
+    const onMouseLeave = (index: number) => {
+        dispatch(mouseLeave(index));
+    };
 
     useEffect(() => {
-        if (!tranList) return;
-        setMax(() => {
-            let max = 0;
-            let check = true;
-            tranList.map((item) => {
-                if (!item.hide) {
-                    if (check) {
-                        setStart(Number(item.tran_date) % 10000 / 100);
-                        check = false;
-                    }
-                    max = max < Number(item.tran_amt) ? Number(item.tran_amt) : max;
-                    setEnd(Number(item.tran_date) % 10000 / 100);
-                }
-            })
-            return max;
+        let max = 1;
+        let min = Number.MAX_SAFE_INTEGER;
+        tranList.map((item, index) => {
+            if (!hideList[index]) {
+                max = Math.max(item.tran_amt, max);
+                min = Math.min(item.tran_amt, min);
+            }
         });
-    }, [tranList]);
+        setHeightArr(Array(tranList.length).fill(0).map((item, index) => (Math.ceil(tranList[index].tran_amt / max * 100))));
+    }, [hideList]);
     
     return (
         <div className={styles.chart}>
-            <div className={styles.amount}>
-                <p>{max}</p>
-                <p>{max / 2}</p>
-                <p>{0}</p>
-            </div>
-            {tranList && tranList.map(item => (
-                !item.hide && <Bar item={item} max={max} />
+            {tranList.map((item, index) => (
+                !hideList[index] && <Bar
+                    key={index}
+                    item={item}
+                    height={heightArr[index]}
+                    hover={hoverList[index]}
+                    onMouseEnter={() => { onMouseEnter(index) }}
+                    onMouseLeave={() => { onMouseLeave(index) }} />
             ))}
-            <div className={styles.date}>
-                <p>{start}</p>
-                <p>{end}</p>
-            </div>
         </div>
     );
 };

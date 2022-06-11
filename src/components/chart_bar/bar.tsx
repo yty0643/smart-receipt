@@ -1,31 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import { ITranItem, mouseEnter, mouseLeave } from '../../features/tran_list/tran_list_slice';
+import { ITranItem } from '../../features/tran_list/tran_list_slice';
 import styles from './bar.module.css';
 
-const Bar = ({ item, max }: { item: ITranItem, max: number }) => {
-    const dispatch = useDispatch();
+const Bar = ({ item, height, hover, onMouseEnter, onMouseLeave }: { item: ITranItem, height: number, hover: boolean, onMouseEnter: () => void, onMouseLeave: () => void }) => {
     const theme = useSelector((state: RootState) => (state.theme.isActive))
-    const tranList = useSelector((state: RootState) => (state.tranList.list));
-    
-    const onMouseEnter = (item: ITranItem) => {
-        dispatch(mouseEnter(item.key));
-    }
-    const onMouseLeave = (item: ITranItem) => {
-        dispatch(mouseLeave(item.key));
-    }
-    const height = Math.ceil(Number(item.tran_amt) / max * 100);
     return (
         <div
-            className={`${styles.bar} ${theme && styles.dark} ${item.hover && styles.hover}`}
+            className={`${styles.bar} ${theme && styles.dark} ${hover && styles.hover}`}
             style={{
                 backgroundColor: `${item.inout_type == "입금" ? "rgb(103, 143, 243)" : "rgb(231, 115, 115)"}`,
                 height: `${height > 100 ? 100 : height}%`
             }}
-            onMouseEnter={() => { onMouseEnter(item) }}
-            onMouseLeave={() => { onMouseLeave(item) }}>
-            <div className={`${styles.detail} ${item.hover && styles.hover}`}>
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}>
+            <div className={`${styles.detail} ${hover && styles.hover}`}>
                 <p className={styles.tag}>#{item.inout_type}</p>
                 <p className={styles.title}>{item.print_content}</p>
                 <div className={styles.box}>
