@@ -1,6 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
 import { ITranItem } from '../../features/tran_list/tran_list_slice';
 import styles from './bar.module.css';
 

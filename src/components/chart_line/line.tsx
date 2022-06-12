@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef, useState } from 'react';
+import React, { RefObject } from 'react';
 import { ITranItem } from '../../features/tran_list/tran_list_slice';
 import styles from './line.module.css'; 
 

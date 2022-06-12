@@ -22,7 +22,8 @@
 }
 
 .item.hover{
-    transform: scale(1.1);
+    transform: scale(1.3);
+    font-weight: 700;
 }
 
 .item.hide{

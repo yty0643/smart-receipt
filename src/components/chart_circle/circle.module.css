@@ -1,0 +1,11 @@
+.circle{
+    position: relative;
+    opacity: 0.5;
+    transition: all ease-in 100ms;
+}
+
+.circle:hover{
+    opacity: 1;
+    stroke-width: 30px;
+}
+

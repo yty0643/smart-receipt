@@ -11,6 +11,7 @@ import TranList from './components/tran_list/tran_list';
 import ChartBar from './components/chart_bar/chart_bar';
 import { setStateList } from './features/state_list/state_list_slice';
 import ChartLine from './components/chart_line/chart_line';
+import ChartCircle from './components/chart_circle/chart_circle';
 
 function App({ finance }: { finance: Finance }) {
   const dispatch = useDispatch();
@@ -103,6 +104,9 @@ function App({ finance }: { finance: Finance }) {
           <ChartBar />
           <ChartLine />
         </div>
+      </section>
+      <section>
+        <ChartCircle />
       </section>
     </div>
   );
