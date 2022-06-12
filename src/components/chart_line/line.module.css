@@ -1,13 +1,45 @@
 .line{
-    width: 10px;
-    height: 10px;
+    position: relative;
+    width: 8px;
+    height: 8px;
     margin-right: auto;
-    border: 2px solid white;
+    border: 1px solid transparent;
     border-radius: 50%;
     background-color: rgb(103, 143, 243);
-    /* transition: all ease-in 100ms; */
 }
 
 .line.hide{
     display: none;
+}
+
+.line.hover{
+    opacity: 1;
+    border: 1px solid black;
+}
+.line.dark.hover{
+    border: 1px solid white;
+}
+
+
+.detail{
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    bottom: 100%;
+    left: 100%;
+    width: 12rem;
+    padding: 0.5rem;
+    border: 1px solid rgb(0, 119, 255);
+    border-radius: 5px;
+    background-color: white;
+    font-size: 0.8rem;
+    transition: all ease-in 100ms;
+    transform: scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+.detail.hover{
+    transform: scale(1);
+    opacity: 1;
 }

@@ -36,11 +36,13 @@ const ChartBar = ({ }) => {
     return (
         <div className={styles.chart}>
             {tranList.map((item, index) => (
-                !hideList[index] && <Bar
+                <Bar
                     key={index}
+                    theme={theme}
                     item={item}
                     height={heightArr[index]}
                     hover={hoverList[index]}
+                    hide={hideList[index]}
                     onMouseEnter={() => { onMouseEnter(index) }}
                     onMouseLeave={() => { onMouseLeave(index) }} />
             ))}

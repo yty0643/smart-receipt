@@ -8,6 +8,9 @@
     transition: all ease-in 100ms;
     opacity: 0.7;
 }
+.bar.hide{
+    display: none;
+}
 .bar.dark{
     border: 1px solid rgb(38, 38, 41);
     border-bottom: none;

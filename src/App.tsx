@@ -10,6 +10,7 @@ import { setTranList } from './features/tran_list/tran_list_slice';
 import TranList from './components/tran_list/tran_list';
 import ChartBar from './components/chart_bar/chart_bar';
 import { setStateList } from './features/state_list/state_list_slice';
+import ChartLine from './components/chart_line/chart_line';
 
 function App({ finance }: { finance: Finance }) {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ function App({ finance }: { finance: Finance }) {
         res.data.res_list.map((item:any, index:number) => {
           temp.push({
             ...item,
+            after_balance_amt: Number(item.after_balance_amt),
             tran_amt: Number(item.tran_amt),
           });
         })
@@ -99,7 +101,7 @@ function App({ finance }: { finance: Finance }) {
         <div className={styles.chart1}>
           <TranList />
           <ChartBar />
-          {/* <ChartLine /> */}
+          <ChartLine />
         </div>
       </section>
     </div>

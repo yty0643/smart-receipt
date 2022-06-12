@@ -1,92 +1,90 @@
 import React, { createRef, RefObject, useEffect, useRef, useState } from 'react';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '../../app/store';
-// import styles from './chart_line.module.css';
-// import Line from './line';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
+import { mouseEnter, mouseLeave } from '../../features/state_list/state_list_slice';
+import styles from './chart_line.module.css';
+import Line from './line';
 
 
-// const ChartLine = () => {
-//     const tranList = useSelector((state: RootState) => (state.tranList.list));
-//     const [max, setMax] = useState<number>(0);
-//     const [min, setMin] = useState<number>(Number.MAX_SAFE_INTEGER);
-//     const [heightArr, setHeightArr] = useState<number[]>();
-//     const canvasRef = useRef<HTMLCanvasElement>(null);
-//     const [refArr, setRefArr] = useState<RefObject<HTMLDivElement>[]>([]);
+const ChartLine = () => {
+    const dispatch = useDispatch();
+    const theme = useSelector((state: RootState) => (state.theme.isActive))
+    const tranList = useSelector((state: RootState) => (state.tranList.list));
+    const hoverList = useSelector((state: RootState) => (state.stateList.hover));
+    const hideList = useSelector((state: RootState) => (state.stateList.hide));
+    const [heightArr, setHeightArr] = useState<number[]>([]);
+    const [refArr, setRefArr] = useState<RefObject<HTMLDivElement>[]>([]);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
-//     const draw = () => {
-//         if (refArr.length == 0 || !refArr[0].current) return;
-//         if (!canvasRef.current) return;
-//         const ctx = canvasRef.current.getContext('2d');
-//         if (!ctx) return;
-//         const dpr = window.devicePixelRatio;
-//         canvasRef.current.width = 256 * dpr;
-//         canvasRef.current.height = 256 * dpr;
-//         ctx.scale(dpr, dpr);
-//         ctx.lineWidth = 2;
-//         ctx.strokeStyle = "rgb(103, 143, 243)";
-//         ctx.beginPath();
-//         let able = true;
-//         tranList.map((item, index) => {
-//             if (item.hide) return;
-//             if (able) {
-//                 able = false;
-//                 ctx.moveTo(refArr[index].current!.offsetLeft+5, refArr[index].current!.offsetTop+5);
-//             } else {
-//                 ctx.lineTo(refArr[index].current!.offsetLeft+5, refArr[index].current!.offsetTop+5);
-//             }
-//         });
-//         ctx.stroke();  
-//     };
+    const onMouseEnter = (index: number) => {
+        dispatch(mouseEnter(index));
+    };
 
-//     useEffect(() => {
-//         setRefArr(() => {
-//             const temp: RefObject<HTMLDivElement>[] = Array(30).fill(null).map(() => (createRef()));
-//             return temp;
-//         });
-//         // console.log("refArr RESET!")
-//     }, []);
+    const onMouseLeave = (index: number) => {
+        dispatch(mouseLeave(index));
+    };
 
-//     useEffect(() => {
-//         if (!tranList) return;
-//         // console.log(tranList);
-//         let tempMax = 0;
-//         let tempMin = Number.MAX_SAFE_INTEGER;
-//         tranList.map((item) => {
-//             if (!item.hide) {
-//                 tempMax = Math.max(Number(item.after_balance_amt), tempMax);
-//                 tempMin = Math.min(Number(item.after_balance_amt), tempMin);
-//             }
-//         })
-//         setMax(tempMax);
-//         setMin(tempMin);
-//         draw();
-//     }, [tranList]);
+    const draw = () => {
+        if (!canvasRef.current) return;
+        const ctx = canvasRef.current.getContext('2d');
+        if (!ctx) return;
+        const dpr = window.devicePixelRatio;
+        canvasRef.current.width = 256 * dpr;
+        canvasRef.current.height = 256 * dpr;
+        ctx.scale(dpr, dpr);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "rgb(103, 143, 243)";
+        ctx.beginPath();
+        let able = true;
+        refArr.map((item, index) => { 
+            if (item.current) {
+                if (able) {
+                    able = false;
+                    ctx.moveTo(item.current.offsetLeft+4, item.current.offsetTop+4);
+                } else {
+                    ctx.lineTo(item.current.offsetLeft+4, item.current.offsetTop+4);
+                }
+            }
+        })
+        ctx.stroke();  
+    };
 
-//     useEffect(() => {
-//         if (max == 0 || min == Number.MAX_SAFE_INTEGER) return;
-//         // console.log("H");
-//         setHeightArr(() => {
-//             const temp: any[] = [];
-//             tranList.map((item) => {
-//                 temp.push(Math.ceil(256 * (Math.ceil((Number(item.after_balance_amt) - min) / ((max - min) * 1.2) * 100) / 100)));
-//             });
-//             return temp;
-//         });
-//     }, [max, min]);
+    useEffect(() => {
+        let max = 1;
+        let min = Number.MAX_SAFE_INTEGER;
+        tranList.map((item, index) => {
+            if (!hideList[index]) {
+                max = Math.max(item.after_balance_amt, max);
+                min = Math.min(item.after_balance_amt, min);
+            }
+        });
+        setHeightArr(Array(tranList.length).fill(0).map((item, index) => (Math.ceil((tranList[index].after_balance_amt - min) / (max - min) * 100 * 0.95) || 1)));
+        setRefArr(Array(tranList.length).fill(null).map(() => (createRef())));
+    }, [hideList]);
 
-//     useEffect(() => { 
-//         // draw();
-//     },[heightArr])
+    useEffect(() => {
+        if (refArr.length == 0 ) return;
+        draw();
+    }, [refArr]);
 
-//     return (
-//         <div className={styles.chart}>
-//             {heightArr && tranList.map((item, index) => (
-//                 <Line item={item} height={heightArr[index]} lineRef={refArr[index]} hide={item.hide} />
-//             ))}
-//             <canvas className={styles.canvas} ref={canvasRef} width="256" height="256">
-//             </canvas>
-//         </div>
-//     );
-// };
+    return (
+        <div className={styles.chart}>
+            {tranList.map((item, index) => (
+                !hideList[index] && <Line
+                    key={index}
+                    theme={theme}
+                    item={item}
+                    lineRef={refArr[index]}
+                    height={heightArr[index]}
+                    hover={hoverList[index]}
+                    hide={hideList[index]}
+                    onMouseEnter={() => { onMouseEnter(index) }}
+                    onMouseLeave={() => { onMouseLeave(index) }} />
+            ))}
+            <canvas className={styles.canvas} ref={canvasRef} width="256" height="256">
+            </canvas>
+        </div>
+    );
+};
 
-// export default ChartLine;
+export default ChartLine;

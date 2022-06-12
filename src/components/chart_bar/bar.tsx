@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { ITranItem } from '../../features/tran_list/tran_list_slice';
 import styles from './bar.module.css';
 
-const Bar = ({ item, height, hover, onMouseEnter, onMouseLeave }: { item: ITranItem, height: number, hover: boolean, onMouseEnter: () => void, onMouseLeave: () => void }) => {
-    const theme = useSelector((state: RootState) => (state.theme.isActive))
+const Bar = ({ theme, item, height, hover,hide, onMouseEnter, onMouseLeave }: { theme:boolean, item: ITranItem, height: number, hover: boolean,hide: boolean, onMouseEnter: () => void, onMouseLeave: () => void }) => {
+
     return (
         <div
-            className={`${styles.bar} ${theme && styles.dark} ${hover && styles.hover}`}
+            className={`${styles.bar} ${theme && styles.dark} ${hide && styles.hide} ${hover && styles.hover}`}
             style={{
                 backgroundColor: `${item.inout_type == "입금" ? "rgb(103, 143, 243)" : "rgb(231, 115, 115)"}`,
                 height: `${height > 100 ? 100 : height}%`
@@ -39,4 +39,4 @@ const Bar = ({ item, height, hover, onMouseEnter, onMouseLeave }: { item: ITranI
     );
 };
 
-export default Bar;
+export default React.memo(Bar);
