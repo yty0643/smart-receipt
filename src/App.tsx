@@ -12,6 +12,7 @@ import ChartBar from './components/chart_bar/chart_bar';
 import { setStateList } from './features/state_list/state_list_slice';
 import ChartLine from './components/chart_line/chart_line';
 import ChartCircle from './components/chart_circle/chart_circle';
+import ChartDetail from './components/chart_detail/chart_detail';
 
 function App({ finance }: { finance: Finance }) {
   const dispatch = useDispatch();
@@ -104,9 +105,10 @@ function App({ finance }: { finance: Finance }) {
           <ChartBar />
           <ChartLine />
         </div>
-      </section>
-      <section>
-        <ChartCircle />
+        <div className={styles.chart1}>
+          <ChartCircle />
+          <ChartDetail />
+        </div>
       </section>
     </div>
   );
