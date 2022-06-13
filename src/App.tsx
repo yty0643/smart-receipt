@@ -16,7 +16,7 @@ import ChartCircle from './components/chart_circle/chart_circle';
 function App({ finance }: { finance: Finance }) {
   const dispatch = useDispatch();
   const theme = useSelector((state: RootState) => (state.theme.isActive));
-  const account:any = useSelector((state: RootState) => (state.selectedAcc.account));
+  const account:any = useSelector((state: RootState) => (state.selected.account));
   const [access_token] = useState<string | null>(window.localStorage.getItem('SR_access_token'));
 
   const finLogic = (access_code: string) => {

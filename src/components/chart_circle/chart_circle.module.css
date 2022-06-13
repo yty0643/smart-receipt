@@ -1,11 +1,12 @@
 .chart{
     position: relative;
+    display: flex; 
 }
 .svg{
     width: 16rem;
     height: 16rem;
 }
-.detail{
+.category{
     position: absolute;
     display: flex;
     align-items: center;

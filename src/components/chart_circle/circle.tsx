@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './circle.module.css';
 
 const Circle = ({ zIndex, bgColor, height, start, onMouseEnter,onMouseLeave }: { zIndex: number, bgColor: string, height: number, start: number, onMouseEnter: () => void ,onMouseLeave: () => void }) => {
+
     const r = 110;
     return (
         <circle className={styles.circle}
