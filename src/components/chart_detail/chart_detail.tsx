@@ -47,24 +47,6 @@ const ChartDetail = () => {
         console.log(temp);
         setHeightArr(Object.values(temp).map((item, index) => (item.length / indexList.length)));
     }, [indexList]);
-     
-    // setDetailList(() => {
-    //     const temp: IDetail[] = [];
-    //     for (let i = 0; i < size; i++) {
-    //         const detail: IDetail = {
-    //             total_amt: 0,
-    //             tran_count: 0,
-    //             tran_contents: [],
-    //         }
-    //         Object.values(category)[i].map(item => {
-    //             detail.total_amt += tranList[item].tran_amt;
-    //             detail.tran_count++;
-    //             detail.tran_contents.push(tranList[item].print_content);
-    //         });
-    //         temp.push(detail);
-    //     };
-    //     return temp;
-    // });
 
     return (
         <div className={styles.chart}>

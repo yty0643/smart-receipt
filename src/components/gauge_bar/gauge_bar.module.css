@@ -1,0 +1,24 @@
+.holder{
+    position: relative;
+    width: 16rem;
+    height: 1rem;
+    background-color: rgba(0, 0, 0, 0.103);
+}
+
+.bar{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 30%;
+    height: 100%;
+    background-color: rgb(134, 153, 203);
+    transition: all ease-in 100ms;
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: grey;
+}
