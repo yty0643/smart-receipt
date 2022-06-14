@@ -1,36 +1,18 @@
-.section{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .container{
     display: flex;
-    align-items: center;
-    justify-content: start;
-    width: 48rem;
-    padding: 2rem 1rem;
-    overflow-x: scroll;
-    touch-action: none;
+    align-items: flex-start;
+    justify-content: center;
+    height: 30rem;
+    overflow-y:scroll;
 }
 ::-webkit-scrollbar {
-    display: none;
+    /* display: none; */
 }
  
-
-.cards{
+.accountList{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 17rem;
-}
-
-.btn{
-    z-index: 1;
-    font-size: 1.3rem;
-    color: rgb(186, 189, 199);
-    position: relative;
-}
-.btn.dark{
-    color: rgb(128, 132, 136);
+    padding: 0 5rem;
 }

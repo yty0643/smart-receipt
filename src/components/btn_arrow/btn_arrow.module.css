@@ -1,0 +1,9 @@
+.btn{
+    z-index: 1;
+    font-size: 1.3rem;
+    color: rgb(186, 189, 199);
+    position: relative;
+}
+.btn.dark{
+    color: rgb(128, 132, 136);
+}

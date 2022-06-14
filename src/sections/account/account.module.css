@@ -1,15 +1,29 @@
 .section{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 10rem 0;
+    height: 40rem;
+    padding: 9rem 0;
     margin-bottom: 2rem;
     background-color: white;
 }
 .section.dark{
     background-color: rgb(38, 38, 41);
+}
+
+.box1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.box2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .title{
