@@ -1,33 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
+import React, { RefObject, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { setAccount } from '../../features/selected/selected_slice';
 import AccountItem from '../account_item/account_item';
 import styles from './account_list.module.css';
 
-const Account_list = ({ focusIdx }: { focusIdx: number }) => {
+const Account_list = ({ accList, focusIdx, divRef }: { accList: { [key: number]: any }, focusIdx: number, divRef:RefObject<HTMLDivElement>, }) => {
     const dispatch = useDispatch();
-    const theme = useSelector((state: RootState) => (state.theme.isActive));
-    const [account_list] = useState<object[] | null>(JSON.parse(window.localStorage.getItem('SR_account_list') || "null"));
-    const conRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (!account_list) return;
-        dispatch(setAccount(account_list[focusIdx]));
+        if (Object.keys(accList).length == 0) return;
+        dispatch(setAccount(accList[focusIdx]));
     }, [focusIdx]);
 
     return (
-        <div className={styles.container} ref={conRef}>
-            <div className={styles.accountList}>
-                {account_list?.map((item, index) => (
-                    <AccountItem
-                        item={item}
-                        index={index}
+        <div className={styles.container} ref={divRef}>
+            <div className={styles.accountList} >
+                {Object.entries(accList).sort(([a, s], [b, d]) => Number(a) - Number(b)).map((item) => {
+                    return (
+                        <AccountItem
+                        item={item[1]}
+                        index={Number(item[0])}
                         focusIdx={focusIdx}
-                        key={index} />
-                ))}
+                        key={item[0]} />
+                    )
+                })}
             </div>
         </div>
     );

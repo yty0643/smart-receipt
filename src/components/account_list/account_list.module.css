@@ -3,10 +3,10 @@
     align-items: flex-start;
     justify-content: center;
     height: 30rem;
-    overflow-y:scroll;
+    overflow-y:hidden;
 }
 ::-webkit-scrollbar {
-    /* display: none; */
+    display: none;
 }
  
 .accountList{
@@ -14,5 +14,5 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 5rem;
+    padding: 10rem 5rem;
 }
