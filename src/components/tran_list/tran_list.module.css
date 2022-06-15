@@ -3,18 +3,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-right: 3rem;
     height: 16rem;
 }
 .list{
-    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0 1rem;
+    align-items: center;
+    justify-content: center;
     overflow-y: scroll;
+    padding: 1rem 0;
 }
 .list::-webkit-scrollbar{
+    width: 0;
     visibility: hidden;
 }
 

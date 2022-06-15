@@ -220,27 +220,34 @@ const Chart = ({ finance }: { finance: Finance }) => {
             });
             return temp;
         });
-    }, [hideList,detaFocusIdx]);
+    }, [hideList, detaFocusIdx]);
 
     return (
         <section className={`${styles.section} ${theme && styles.dark}`}>
-            <p className={`${styles.title} ${theme && styles.dark}`}>거래 통계</p>
-            <p className={`${styles.description} ${theme && styles.dark}`}>선택된 계좌의 거래통계입니다.</p>
-            <div className={styles.chart1}>
-                <TranList {...props} />
-                <ChartBar {...props} heightArr={barHeightArr} />
-                <ChartLine {...props} heightArr={lineHeightArr} />
+            <div className={styles.box1}>
+                <p className={`${styles.title} ${theme && styles.dark}`}>선택한 계좌의 거래내역을 분석한 그래프를 제공합니다.</p>
+                <p className={`${styles.subTitle} ${theme && styles.dark}`}>리덕스로 관리하고 있는 거래데이터를 라이브러리 없이 그래프로 구현했습니다.</p>
+                <p className={`${styles.description} ${theme && styles.dark}`}>최대한 코드 중복을 피하고자 했습니다.</p>
             </div>
-            <div className={styles.chart1}>
-                <ChartCircle {...props2} idx={1} focusIdx={cateFocusIdx} heightArr={circleheightArr} />
-                <ChartCircle {...props2} category={category2} idx={2} focusIdx={detaFocusIdx} heightArr={detailHeightArr} />
-                <div>
-                    <p>Local</p>
-                    <GaugeBar title={"비용"} value={values.amt} total={values.totalAmt} />
-                    <GaugeBar title={"횟수"} value={values.cnt} total={values.totalCnt} />
-                    <p>Global</p>
-                    <GaugeBar title={"비용"} value={values.amt} total={values.globalAmt} />
-                    <GaugeBar title={"횟수"} value={values.cnt} total={values.globalCnt} />
+            <div className={styles.box2}>
+                <TranList {...props} />
+                <div className={styles.chart}>
+                    <ChartBar {...props} heightArr={barHeightArr} />
+                    <ChartLine {...props} heightArr={lineHeightArr} />
+                </div>
+                <div className={styles.chart}>
+                    <ChartCircle {...props2} idx={1} focusIdx={cateFocusIdx} heightArr={circleheightArr} />
+                    <ChartCircle {...props2} category={category2} idx={2} focusIdx={detaFocusIdx} heightArr={detailHeightArr} />
+                </div>
+                <div className={styles.chart}>
+                    <div>
+                        <p>Local</p>
+                        <GaugeBar title={"비용"} value={values.amt} total={values.totalAmt} />
+                        <GaugeBar title={"횟수"} value={values.cnt} total={values.totalCnt} />
+                        <p>Global</p>
+                        <GaugeBar title={"비용"} value={values.amt} total={values.globalAmt} />
+                        <GaugeBar title={"횟수"} value={values.cnt} total={values.globalCnt} />
+                    </div>
                 </div>
             </div>
         </section>

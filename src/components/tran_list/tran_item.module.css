@@ -1,5 +1,6 @@
 .item{
-    font-size: 0.6rem;
+    word-break: keep-all;
+    font-size: 1rem;
     color: rgb(136, 136, 136);
     transition: all ease-in 100ms;
 }
