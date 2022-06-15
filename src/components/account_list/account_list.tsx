@@ -1,16 +1,8 @@
-import React, { RefObject, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setAccount } from '../../features/selected/selected_slice';
+import React, { RefObject } from 'react';
 import AccountItem from '../account_item/account_item';
 import styles from './account_list.module.css';
 
 const Account_list = ({ accList, focusIdx, divRef }: { accList: { [key: number]: any }, focusIdx: number, divRef:RefObject<HTMLDivElement>, }) => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (Object.keys(accList).length == 0) return;
-        dispatch(setAccount(accList[focusIdx]));
-    }, [focusIdx]);
 
     return (
         <div className={styles.container} ref={divRef}>

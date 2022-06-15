@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import AccountList from '../../components/account_list/account_list';
 import BtnArrow from '../../components/btn_arrow/btn_arrow';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import styles from './account.module.css';
+import { setAccount } from '../../features/selected/selected_slice';
 
 const Account = () => {
+    const dispatch = useDispatch();
     const theme = useSelector((state: RootState) => (state.theme.isActive));
-    const [accList, setAccList] = useState<object[]>(JSON.parse(window.localStorage.getItem('SR_account_list') || "[]"));
+    const [accList] = useState<object[]>(JSON.parse(window.localStorage.getItem('SR_account_list') || "[]"));
     const [newList, setNewList] = useState<{ [key: number]: any }>({});
     const [focusIdx, setFocusIdx] = useState<number>(1);
     const [isActive, setIsActive] = useState<boolean>(false);
@@ -51,6 +53,11 @@ const Account = () => {
     };
 
     useEffect(() => {
+        if (Object.keys(newList).length == 0) return;
+        dispatch(setAccount(newList[focusIdx]));
+    }, [focusIdx]);
+
+    useEffect(() => {
         if (accList.length == 0) return;
         setNewList(() => {
             const temp:{[key:number]:any} = {...accList};
@@ -70,7 +77,6 @@ const Account = () => {
             top: Math.floor(divRef.current.scrollTop/2),
             behavior: 'auto',
         })
-        console.log(divRef.current.scrollTop)
     }, [newList]);
 
     return (

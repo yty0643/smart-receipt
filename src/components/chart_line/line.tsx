@@ -2,7 +2,18 @@ import React, { RefObject } from 'react';
 import { ITranItem } from '../../features/tran_list/tran_list_slice';
 import styles from './line.module.css'; 
 
-const Line = ({ theme, item, lineRef, height, hover, hide, onMouseEnter, onMouseLeave }: { theme: boolean, item: ITranItem, lineRef: RefObject<HTMLDivElement>, height: number, hover: boolean, hide: boolean, onMouseEnter: () => void, onMouseLeave: () => void }) => {
+interface IProps {
+    theme: boolean,
+    item: ITranItem,
+    lineRef: RefObject<HTMLDivElement>,
+    height: number,
+    hover: boolean,
+    hide: boolean,
+    onMouseEnter: () => void,
+    onMouseLeave: () => void
+};
+
+const Line = ({ theme, item, lineRef, height, hover, hide, onMouseEnter, onMouseLeave }: IProps) => {
     return (
         <div
             className={`${styles.line} ${theme && styles.dark} ${hide && styles.hide} ${hover && styles.hover}`}
