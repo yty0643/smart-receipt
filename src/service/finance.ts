@@ -51,7 +51,8 @@ export default class Finance{
     };
 
     // 거래 내역 조회
-    transactionDetails(ACCESS_TOKEN: string, RANDOM_NUM: string, FINTECH_USE_NUM: string) {
+    transactionDetails(ACCESS_TOKEN: string, FINTECH_USE_NUM: string) {
+        const RANDOM_NUM = Math.floor((Math.random() * (999999999 - 0) + 0)).toString().padStart(9, '0');
         return axios.get('/v2.0/account/transaction_list/fin_num', {
             params: {
                 // 은행거래고유번호 = 기관고유번호 + U + 기간부여번호(9자리 난수 중복x)

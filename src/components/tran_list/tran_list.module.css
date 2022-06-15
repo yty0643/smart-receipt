@@ -14,6 +14,9 @@
     padding: 0 1rem;
     overflow-y: scroll;
 }
+.list::-webkit-scrollbar{
+    visibility: hidden;
+}
 
 .upBtn{
     pointer-events: none;

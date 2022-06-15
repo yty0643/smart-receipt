@@ -1,5 +1,5 @@
 import React, { RefObject } from 'react';
-import { ITranItem } from '../../features/tran_list/tran_list_slice';
+import { ITranItem } from '../../features/transaction/transaction_slice';
 import styles from './line.module.css'; 
 
 interface IProps {

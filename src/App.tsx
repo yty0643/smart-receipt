@@ -17,7 +17,7 @@ function App({ finance }: { finance: Finance }) {
       <Header />
       <Signup finance={finance}/>
       <Account />
-      <Chart />
+      <Chart finance={finance}/>
       <Footer />
     </div>
   );

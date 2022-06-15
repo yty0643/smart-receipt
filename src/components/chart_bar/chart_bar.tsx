@@ -3,7 +3,7 @@ import { IProps } from '../../sections/chart/chart';
 import Bar from './bar';
 import styles from './chart_bar.module.css';
 
-const ChartBar = ({ theme, tranList, hoverList, hideList, heightArr, onMouseEnter, onMouseLeave }: IProps) => {
+const ChartBar = ({ theme, tranList, hideList, focusIdx, heightArr, onMouseEnter, onMouseLeave }: IProps) => {
     return (
         <div className={styles.chart}>
             {tranList.map((item, index) => (
@@ -12,7 +12,7 @@ const ChartBar = ({ theme, tranList, hoverList, hideList, heightArr, onMouseEnte
                     theme={theme}
                     item={item}
                     height={heightArr[index]}
-                    hover={hoverList[index]}
+                    hover={index == focusIdx ? true : false}
                     hide={hideList[index]}
                     onMouseEnter={() => { onMouseEnter(index) }}
                     onMouseLeave={() => { onMouseLeave(index) }} />

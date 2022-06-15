@@ -1,5 +1,5 @@
 import React from 'react';
-import { ITranItem } from '../../features/tran_list/tran_list_slice';
+import { ITranItem } from '../../features/transaction/transaction_slice';
 import styles from './bar.module.css';
 
 interface IProps {

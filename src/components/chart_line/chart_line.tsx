@@ -3,7 +3,7 @@ import { IProps } from '../../sections/chart/chart';
 import styles from './chart_line.module.css';
 import Line from './line';
 
-const ChartLine = ({ theme, tranList, hoverList, hideList, heightArr, onMouseEnter, onMouseLeave }: IProps) => {
+const ChartLine = ({ theme, tranList, hideList, focusIdx, heightArr, onMouseEnter, onMouseLeave }: IProps) => {
     const [refArr, setRefArr] = useState<RefObject<HTMLDivElement>[]>([]);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -50,7 +50,7 @@ const ChartLine = ({ theme, tranList, hoverList, hideList, heightArr, onMouseEnt
                     item={item}
                     lineRef={refArr[index]}
                     height={heightArr[index]}
-                    hover={hoverList[index]}
+                    hover={index == focusIdx ? true : false}
                     hide={hideList[index]}
                     onMouseEnter={() => { onMouseEnter(index) }}
                     onMouseLeave={() => { onMouseLeave(index) }} />

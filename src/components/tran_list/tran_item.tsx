@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './tran_item.module.css';
 
 interface IProps {
@@ -10,10 +10,11 @@ interface IProps {
     onMouseLeave: () => void,
 };
 
-const TranItem = ({ item,hover,hide,onClick,onMouseEnter,onMouseLeave}:IProps) => {
+const TranItem = ({ item, hover, hide, onClick, onMouseEnter, onMouseLeave }: IProps) => {
+
     return (
         <p
-            className={`${styles.item} ${hover&& styles.hover} ${hide && styles.hide}`}
+            className={`${styles.item} ${hover && styles.hover} ${hide && styles.hide}`}
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}>

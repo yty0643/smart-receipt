@@ -4,7 +4,7 @@
     transition: all ease-in 100ms;
 }
 
-.circle:hover{
+.circle.hover{
     opacity: 1;
     stroke-width: 30px;
 }

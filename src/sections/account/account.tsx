@@ -61,7 +61,7 @@ const Account = () => {
         if (accList.length == 0) return;
         setNewList(() => {
             const temp:{[key:number]:any} = {...accList};
-            const keys = Object.keys(temp).map(item=>Number(item));
+            // const keys = Object.keys(temp).map(item=>Number(item));
             return temp;
         })
     }, [accList])
