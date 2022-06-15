@@ -30,7 +30,7 @@ const ChartCircle = ({ theme, cateList, category, bgColor, focusIdx, idx, height
             {focusIdx != -1 && category &&
                 <div className={styles.description}>
                     <p className={styles.title}>{category[focusIdx]}</p>
-                    <p className={styles.percent}>{Math.floor(heightArr[focusIdx] * 100) + '%'}</p>
+                    <p className={styles.percent}>{heightArr.length != 0 && (Math.floor(heightArr[focusIdx] * 100)+ '%')}</p>
                 </div>}
         </div>
     );

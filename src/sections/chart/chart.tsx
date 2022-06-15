@@ -47,6 +47,7 @@ const Chart = ({ finance }: { finance: Finance }) => {
     const [lineHeightArr, setLineHeightArr] = useState<number[]>([]);
     const [circleheightArr, setCircleheightArr] = useState<number[]>([]);
     const [detailHeightArr, setDetailHeightArr] = useState<number[]>([]);
+    const [values, setValues] = useState<any>({});
     const category = ['카페', '편의점, 마트', '주유소', '음식점', '카카오페이', '기타'];
     const [category2, setCategory2] = useState<string[]>([]);
     const keyword = [
@@ -72,7 +73,7 @@ const Chart = ({ finance }: { finance: Finance }) => {
         theme,
         tranList,
         hideList,
-        focusIdx:tranFocusIdx,
+        focusIdx: tranFocusIdx,
         heightArr: [],
         onMouseEnter: (index) => {
             dispatch(mouseEnter(index));
@@ -102,7 +103,7 @@ const Chart = ({ finance }: { finance: Finance }) => {
         },
     };
 
-    const maxmin = (arr:number[]) => {
+    const maxmin = (arr: number[]) => {
         let max = 1;
         let min = Number.MAX_SAFE_INTEGER;
         arr.map((item, index) => {
@@ -123,7 +124,10 @@ const Chart = ({ finance }: { finance: Finance }) => {
         return false;
     };
 
+
     useEffect(() => {
+        setDetailHeightArr([]); // 차트 초기화 용
+        setCateFocusIdx(-1); // 차트 초기화 용
         if (Object.keys(account).length == 0) return;
         finance.transactionDetails(access_token!, account.fintech_use_num)
             .then(res => {
@@ -188,6 +192,36 @@ const Chart = ({ finance }: { finance: Finance }) => {
         });
     }, [hideList, cateFocusIdx]);
 
+    useEffect(() => {
+        if (detaFocusIdx == -1) return;
+        setValues(() => {
+            const temp = {
+                amt: 0,
+                cnt: 0,
+                totalAmt: 0,
+                totalCnt: 0,
+                globalAmt: 0,
+                globalCnt: 0,
+            };
+            tranList.map((item) => {
+                temp.globalAmt += item.tran_amt;
+            })
+            hideList.map((item) => {
+                if (item)
+                    temp.globalCnt++;
+            })
+            Object.values(cateList[cateFocusIdx])[0].map((item) => {
+                if (item.print_content == category2[detaFocusIdx]) {
+                    temp.amt += item.tran_amt;
+                    temp.cnt++;
+                }
+                temp.totalAmt += item.tran_amt;
+                temp.totalCnt++;
+            });
+            return temp;
+        });
+    }, [hideList,detaFocusIdx]);
+
     return (
         <section className={`${styles.section} ${theme && styles.dark}`}>
             <p className={`${styles.title} ${theme && styles.dark}`}>거래 통계</p>
@@ -200,7 +234,14 @@ const Chart = ({ finance }: { finance: Finance }) => {
             <div className={styles.chart1}>
                 <ChartCircle {...props2} idx={1} focusIdx={cateFocusIdx} heightArr={circleheightArr} />
                 <ChartCircle {...props2} category={category2} idx={2} focusIdx={detaFocusIdx} heightArr={detailHeightArr} />
-                <GaugeBar />
+                <div>
+                    <p>Local</p>
+                    <GaugeBar title={"비용"} value={values.amt} total={values.totalAmt} />
+                    <GaugeBar title={"횟수"} value={values.cnt} total={values.totalCnt} />
+                    <p>Global</p>
+                    <GaugeBar title={"비용"} value={values.amt} total={values.globalAmt} />
+                    <GaugeBar title={"횟수"} value={values.cnt} total={values.globalCnt} />
+                </div>
             </div>
         </section>
     );
