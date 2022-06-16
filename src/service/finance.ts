@@ -19,7 +19,6 @@ export default class Finance{
         window.open(url, "_blank");
     };
     
-
     // 토큰 발급
     generateToken(ACCESS_CODE: string) {        
         return axios.post('/oauth/2.0/token',

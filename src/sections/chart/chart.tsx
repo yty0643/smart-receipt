@@ -36,7 +36,7 @@ export interface IProps2{
 const Chart = ({ finance }: { finance: Finance }) => {
     const dispatch = useDispatch();
     const account: any = useSelector((state: RootState) => (state.selected.account));
-    const [access_token] = useState<string | null>(window.localStorage.getItem('SR_access_token'));
+    const [access_token,setAccess_token] = useState<string | null>(window.localStorage.getItem('SR_access_token'));
     const theme = useSelector((state: RootState) => (state.theme.isActive));
     const tranList = useSelector((state: RootState) => (state.transaction.tranList));
     const hideList = useSelector((state: RootState) => (state.transaction.hideList));
@@ -135,6 +135,9 @@ const Chart = ({ finance }: { finance: Finance }) => {
         return false;
     };
 
+    useEffect(() => { 
+        setAccess_token(window.localStorage.getItem('SR_access_token'));
+    }, [window.localStorage]);
 
     useEffect(() => {
         setDetailHeightArr([]); // 차트 초기화 용

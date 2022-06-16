@@ -2,14 +2,14 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
     app.use(
-        '/smart-receipt/oauth',
+        '/oauth',
         createProxyMiddleware({
             target: 'https://testapi.openbanking.or.kr',
             changeOrigin: true,
         })
     );
     app.use(
-        '/smart-receipt/v2.0',
+        '/v2.0',
         createProxyMiddleware({
             target: 'https://testapi.openbanking.or.kr',
             changeOrigin: true,
@@ -19,3 +19,4 @@ module.exports = function(app) {
 
 // https://openapi.openbanking.or.kr
 // https://testapi.openbanking.or.kr
+
