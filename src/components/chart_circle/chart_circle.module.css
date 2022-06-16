@@ -1,6 +1,7 @@
 .chart{
     position: relative;
-    display: flex; 
+    display: flex;
+    margin-bottom: 1.5rem;
 }
 .svg{
     width: 16rem;

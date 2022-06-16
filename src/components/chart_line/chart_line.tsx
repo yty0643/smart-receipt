@@ -58,8 +58,8 @@ const ChartLine = ({ theme, tranList, hideList, focusIdx, heightArr, maxMin, onM
             <canvas className={styles.canvas} ref={canvasRef} width="256" height="256">
             </canvas>
             <div className={styles.vertical}>
-                <p>{maxMin.max}</p>
-                <p>{(maxMin.max+maxMin.min)/2}</p>
+            <p>{(maxMin.max||1)}</p>
+                <p>{((maxMin.max+maxMin.min)||1)/2}</p>
                 <p>{maxMin.min}</p>
             </div>
             <div className={styles.des}>amount/date</div>

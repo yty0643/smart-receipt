@@ -30,8 +30,8 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    bottom: 100%;
-    left: 100%;
+    top: -11rem;
+    left: 0;
     width: 12rem;
     padding: 1.5rem 1rem;
     border: 1px solid rgb(0, 119, 255);
@@ -64,4 +64,10 @@
     justify-content: space-between;
     font-size: 0.8rem;
     font-weight: 100;
+}
+
+@media screen and (max-width: 45rem) {
+    .detail{
+        left: -6rem;
+    }
 }

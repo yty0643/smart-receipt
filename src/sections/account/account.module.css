@@ -63,3 +63,20 @@
     font-size: 0.8rem;
     font-weight: 300;
 }
+
+@media screen and (max-width: 45rem) {
+    .contents{
+        flex-direction: column-reverse;
+    }
+    .box2{
+        padding-bottom: 3rem;
+    }
+    .title,
+    .subTitle,
+    .description{
+        text-align: center;
+    }
+    .title{
+        font-size: 1.7rem;
+    }
+}

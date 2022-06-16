@@ -26,8 +26,8 @@
     position: absolute;
     display: flex;
     justify-content: space-between;
-    bottom: 100%;
-    left: 100%;
+    bottom: calc(100% + 0.5rem);
+    right: 0;
     width: 12rem;
     padding: 0.5rem;
     border: 1px solid rgb(0, 119, 255);
@@ -42,4 +42,10 @@
 .detail.hover{
     transform: scale(1);
     opacity: 1;
+}
+
+@media screen and (max-width: 45rem) {
+    .detail{
+        left: -6rem;
+    }
 }

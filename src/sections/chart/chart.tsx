@@ -120,6 +120,7 @@ const Chart = ({ finance }: { finance: Finance }) => {
                 min = Math.min(item, min);
             }
         });
+        if (max == 1) min = 0;
         start = start % 10000 / 100;
         end = end % 10000 / 100;
         return { max, min, start, end };
@@ -164,7 +165,6 @@ const Chart = ({ finance }: { finance: Finance }) => {
         
         setLineHeightArr(() => {
             let { max, min, start, end } = findMaxMin(tranList.map((item) => (item.after_balance_amt)));
-            console.log( max, min, start, end)
             setLineMaxMin({ max, min, start, end });
             return Array(tranList.length).fill(0).map((item, index) => (Math.ceil((tranList[index].after_balance_amt - min) / (max - min) * 100 * 0.95) || 1))
         });
@@ -255,10 +255,10 @@ const Chart = ({ finance }: { finance: Finance }) => {
                     </div>
                     <div className={styles.chart}>
                         <div>
-                            <p>Local</p>
+                            <p className={`${styles.subTitle} ${theme && styles.dark}`}>Local</p>
                             <GaugeBar title={"비용"} value={values.amt} total={values.totalAmt} />
                             <GaugeBar title={"횟수"} value={values.cnt} total={values.totalCnt} />
-                            <p>Global</p>
+                            <p className={`${styles.subTitle} ${theme && styles.dark}`}>Global</p>
                             <GaugeBar title={"비용"} value={values.amt} total={values.globalAmt} />
                             <GaugeBar title={"횟수"} value={values.cnt} total={values.globalCnt} />
                         </div>
