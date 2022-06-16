@@ -36,16 +36,18 @@ const Signup = ({ finance }: { finance: Finance }) => {
             .then(res => {
                 if (res.data.rsp_code != 'A0000')
                     throw new Error(res.data.rsp_message);
-
                 window.localStorage.setItem('SR_account_list', JSON.stringify(res.data.res_list));
                 window.localStorage.setItem('SR_fintech_use_num', res.data.res_list[1].fintech_use_num);
             })
+            .then(()=>{window.location.search = "";})
+            .catch(error => {
+                console.log(error)
+            });
     };
 
     useEffect(() => {
         if (!window.location.search) return;
         finLogic(window.location.search.split('=')[1].split('&')[0]);
-        window.location.search = "";
     }, [window.location.search]);
 
     return (

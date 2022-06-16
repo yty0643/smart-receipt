@@ -16,7 +16,7 @@ export default class Finance{
             `authorized_cert_yn=Y&` +
             `account_hold_auth_yn=N&` +
             `register_info=A`;
-        window.open(url, "_blank");
+        window.open(url,"_self");
     };
     
     // 토큰 발급
