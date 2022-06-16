@@ -1,4 +1,4 @@
-# smart-receipt
+# smart-receipt [바로가기](https://yty0643.github.io/smart-receipt/)
 
 금융결제원 API를 통해 사용자의 계좌를 조회하고 분석하여 다양한 통계(그래프)를 제공하는 웹 서비스이다.
 
