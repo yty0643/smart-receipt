@@ -8,7 +8,8 @@ const Footer = () => {
 
     return (
         <footer className={`${styles.footer} ${theme && styles.dark}`}>
-            
+            <a className={`${styles.link} ${theme && styles.dark}`} href="https://github.com/yty0643/smart-receipt">Docs</a>
+            <a className={`${styles.link} ${theme && styles.dark}`} href="https://github.com/yty0643">GitHub</a>
         </footer>
     );
 };
