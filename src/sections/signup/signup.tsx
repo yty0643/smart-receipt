@@ -50,13 +50,15 @@ const Signup = ({ finance }: { finance: Finance }) => {
 
     return (
         <section className={`${styles.section} ${theme && styles.dark}`}>
-            <div className={`${styles.box} ${theme && styles.dark}`}>
-                <p className={`${styles.title}`}>금융결제원 API를 통해 계좌를 등록하고 웹에서 제공되는 서비스를 이용하세요.</p>
-                <p className={`${styles.subTitle}`}>금융결제원 API을 Axios로 사용하고 있습니다. 총 네 가지 과정을 거쳐 등록된 계좌의 거래 내역을 조회하도록 설계했습니다.</p>
-                <p className={`${styles.description}`}>사용자 인증 - 토큰 발급 - 사용자 정보 조회 - 거래 내역 조회</p>
-            </div>
-            <div className={styles.btns}>
-                <BtnText onClick={onClick} text={"Join us"} />
+            <div className={`${styles.contents} ${theme && styles.dark}`}>
+                <div className={`${styles.box1} ${theme && styles.dark}`}>
+                    <p className={`${styles.title}`}>금융결제원 API를 통해 계좌를 등록하고 웹에서 제공되는 서비스를 이용하세요.</p>
+                    <p className={`${styles.subTitle}`}>금융결제원 API을 Axios로 사용하고 있습니다. 총 네 가지 과정을 거쳐 등록된 계좌의 거래 내역을 조회하도록 설계했습니다.</p>
+                    <p className={`${styles.description}`}>사용자 인증 - 토큰 발급 - 사용자 정보 조회 - 거래 내역 조회</p>
+                </div>
+                <div className={styles.box2}>
+                    <BtnText onClick={onClick} text={"Join us"} />
+                </div>
             </div>
         </section>
     );

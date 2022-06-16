@@ -25,10 +25,12 @@
     width: 0%;
     height: 100%;
     border-radius: 5px;
-    background-color: rgb(54, 57, 59);
     background-color: white;
     transition: all ease-in 200ms;
 }
 .cover.active{
     width: 100%;
+}
+.cover.dark.active{
+    background-color: rgb(212, 219, 225);
 }
