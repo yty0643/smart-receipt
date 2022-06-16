@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/smart-receipt/static/css/main.f513dcd2.css",
+    "main.js": "/smart-receipt/static/js/main.17d2b6e0.js",
+    "static/js/787.d0f88847.chunk.js": "/smart-receipt/static/js/787.d0f88847.chunk.js",
+    "static/media/chip.png": "/smart-receipt/static/media/chip.064d35f90a6795dd2079.png",
+    "index.html": "/smart-receipt/index.html",
+    "main.f513dcd2.css.map": "/smart-receipt/static/css/main.f513dcd2.css.map",
+    "main.17d2b6e0.js.map": "/smart-receipt/static/js/main.17d2b6e0.js.map",
+    "787.d0f88847.chunk.js.map": "/smart-receipt/static/js/787.d0f88847.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f513dcd2.css",
+    "static/js/main.17d2b6e0.js"
+  ]
+}
