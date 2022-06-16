@@ -1,20 +1,35 @@
 .section{
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 9rem 0 3rem 0;
+    padding: 9rem 0;
     margin-bottom: 2rem;
-    background-color: white;
+    background-color: white;    
 }
 
-.box1{
+.contents{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 33rem;
+    max-width: 50rem;
+    padding: 0 3rem;
+}
+
+.box1{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.box2{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .title{
@@ -48,19 +63,11 @@
     color: white;
 }
 
-
-.box2{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .chart{
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
+    justify-content: space-around;
     flex-wrap: wrap;
+    padding: 1rem 0;
 }
 

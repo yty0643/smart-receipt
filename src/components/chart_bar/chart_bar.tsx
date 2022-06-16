@@ -3,7 +3,7 @@ import { IProps } from '../../sections/chart/chart';
 import Bar from './bar';
 import styles from './chart_bar.module.css';
 
-const ChartBar = ({ theme, tranList, hideList, focusIdx, heightArr, onMouseEnter, onMouseLeave }: IProps) => {
+const ChartBar = ({ theme, tranList, hideList, focusIdx, heightArr, maxMin, onMouseEnter, onMouseLeave }: IProps) => {
     return (
         <div className={styles.chart}>
             {tranList.map((item, index) => (
@@ -17,6 +17,16 @@ const ChartBar = ({ theme, tranList, hideList, focusIdx, heightArr, onMouseEnter
                     onMouseEnter={() => { onMouseEnter(index) }}
                     onMouseLeave={() => { onMouseLeave(index) }} />
             ))}
+            <div className={styles.vertical}>
+                <p>{maxMin.max}</p>
+                <p>{maxMin.max/2}</p>
+                <p>{0}</p>
+            </div>
+            <div className={styles.des}>pay/date</div>
+            <div className={styles.horizontal}>
+                <p>{maxMin.start}</p>
+                <p>{maxMin.end}</p>
+            </div>
         </div>
     );
 };

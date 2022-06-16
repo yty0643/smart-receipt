@@ -17,6 +17,7 @@ export interface IProps{
     hideList: boolean[],
     focusIdx: number,
     heightArr: number[],
+    maxMin: { max: number, min: number, start:number, end:number },
     onMouseEnter: (index: number) => void,
     onMouseLeave: (index: number) => void,
 };
@@ -47,6 +48,8 @@ const Chart = ({ finance }: { finance: Finance }) => {
     const [lineHeightArr, setLineHeightArr] = useState<number[]>([]);
     const [circleheightArr, setCircleheightArr] = useState<number[]>([]);
     const [detailHeightArr, setDetailHeightArr] = useState<number[]>([]);
+    const [barMaxMin, setBarMaxMin] = useState<any>({});
+    const [LineMaxMin, setLineMaxMin] = useState<any>({});
     const [values, setValues] = useState<any>({});
     const category = ['카페', '편의점, 마트', '주유소', '음식점', '카카오페이', '기타'];
     const [category2, setCategory2] = useState<string[]>([]);
@@ -75,6 +78,7 @@ const Chart = ({ finance }: { finance: Finance }) => {
         hideList,
         focusIdx: tranFocusIdx,
         heightArr: [],
+        maxMin: { max: 0, min: 0, start: 0, end: 0 },
         onMouseEnter: (index) => {
             dispatch(mouseEnter(index));
         },
@@ -103,16 +107,22 @@ const Chart = ({ finance }: { finance: Finance }) => {
         },
     };
 
-    const maxmin = (arr: number[]) => {
+    const findMaxMin = (arr: number[]) => {
         let max = 1;
         let min = Number.MAX_SAFE_INTEGER;
+        let start = 0;
+        let end = 0;
         arr.map((item, index) => {
             if (!hideList[index]) {
+                if (!start) start = Number(tranList[index].tran_date);
+                end = Number(tranList[index].tran_date);
                 max = Math.max(item, max);
                 min = Math.min(item, min);
             }
         });
-        return { max, min };
+        start = start % 10000 / 100;
+        end = end % 10000 / 100;
+        return { max, min, start, end };
     };
 
     const strCmp: (str: string, arr: string[]) => boolean = (str, arr) => {
@@ -146,14 +156,17 @@ const Chart = ({ finance }: { finance: Finance }) => {
     }, [account]);
 
     useEffect(() => {
-        setLineHeightArr(() => {
-            let { max, min } = maxmin(tranList.map((item) => (item.after_balance_amt)));
-            return Array(tranList.length).fill(0).map((item, index) => (Math.ceil((tranList[index].after_balance_amt - min) / (max - min) * 100 * 0.95) || 1))
+        setBarHeightArr(() => {
+            let { max, min, start, end } = findMaxMin(tranList.map((item, index) => (item.tran_amt)));
+            setBarMaxMin({ max, min: 0, start, end });
+            return Array(tranList.length).fill(0).map((item, index) => (Math.ceil(tranList[index].tran_amt / max * 100)));
         });
         
-        setBarHeightArr(() => {
-            let { max, min } = maxmin(tranList.map((item) => (item.tran_amt)));
-            return Array(tranList.length).fill(0).map((item, index) => (Math.ceil(tranList[index].tran_amt / max * 100)));
+        setLineHeightArr(() => {
+            let { max, min, start, end } = findMaxMin(tranList.map((item) => (item.after_balance_amt)));
+            console.log( max, min, start, end)
+            setLineMaxMin({ max, min, start, end });
+            return Array(tranList.length).fill(0).map((item, index) => (Math.ceil((tranList[index].after_balance_amt - min) / (max - min) * 100 * 0.95) || 1))
         });
 
         setCircleheightArr(() => {
@@ -224,29 +237,31 @@ const Chart = ({ finance }: { finance: Finance }) => {
 
     return (
         <section className={`${styles.section} ${theme && styles.dark}`}>
-            <div className={styles.box1}>
-                <p className={`${styles.title} ${theme && styles.dark}`}>선택한 계좌의 거래내역을 분석한 그래프를 제공합니다.</p>
-                <p className={`${styles.subTitle} ${theme && styles.dark}`}>리덕스로 관리하고 있는 거래데이터를 라이브러리 없이 그래프로 구현했습니다.</p>
-                <p className={`${styles.description} ${theme && styles.dark}`}>최대한 코드 중복을 피하고자 했습니다.</p>
-            </div>
-            <div className={styles.box2}>
-                <TranList {...props} />
-                <div className={styles.chart}>
-                    <ChartBar {...props} heightArr={barHeightArr} />
-                    <ChartLine {...props} heightArr={lineHeightArr} />
+            <div className={`${styles.contents} ${theme && styles.dark}`}>
+                <div className={styles.box1}>
+                    <p className={`${styles.title} ${theme && styles.dark}`}>선택한 계좌의 거래내역을 분석한 그래프를 제공합니다.</p>
+                    <p className={`${styles.subTitle} ${theme && styles.dark}`}>리덕스로 관리하고 있는 거래데이터를 라이브러리 없이 그래프로 구현했습니다.</p>
+                    <p className={`${styles.description} ${theme && styles.dark}`}>최대한 코드 중복을 피하고자 했습니다.</p>
                 </div>
-                <div className={styles.chart}>
-                    <ChartCircle {...props2} idx={1} focusIdx={cateFocusIdx} heightArr={circleheightArr} />
-                    <ChartCircle {...props2} category={category2} idx={2} focusIdx={detaFocusIdx} heightArr={detailHeightArr} />
-                </div>
-                <div className={styles.chart}>
-                    <div>
-                        <p>Local</p>
-                        <GaugeBar title={"비용"} value={values.amt} total={values.totalAmt} />
-                        <GaugeBar title={"횟수"} value={values.cnt} total={values.totalCnt} />
-                        <p>Global</p>
-                        <GaugeBar title={"비용"} value={values.amt} total={values.globalAmt} />
-                        <GaugeBar title={"횟수"} value={values.cnt} total={values.globalCnt} />
+                <div className={styles.box2}>
+                    <TranList {...props} />
+                    <div className={styles.chart}>
+                        <ChartBar {...props} heightArr={barHeightArr} maxMin={barMaxMin} />
+                        <ChartLine {...props} heightArr={lineHeightArr} maxMin={LineMaxMin} />
+                    </div>
+                    <div className={styles.chart}>
+                        <ChartCircle {...props2} idx={1} focusIdx={cateFocusIdx} heightArr={circleheightArr} />
+                        <ChartCircle {...props2} category={category2} idx={2} focusIdx={detaFocusIdx} heightArr={detailHeightArr} />
+                    </div>
+                    <div className={styles.chart}>
+                        <div>
+                            <p>Local</p>
+                            <GaugeBar title={"비용"} value={values.amt} total={values.totalAmt} />
+                            <GaugeBar title={"횟수"} value={values.cnt} total={values.totalCnt} />
+                            <p>Global</p>
+                            <GaugeBar title={"비용"} value={values.amt} total={values.globalAmt} />
+                            <GaugeBar title={"횟수"} value={values.cnt} total={values.globalCnt} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import { IProps } from '../../sections/chart/chart';
 import styles from './chart_line.module.css';
 import Line from './line';
 
-const ChartLine = ({ theme, tranList, hideList, focusIdx, heightArr, onMouseEnter, onMouseLeave }: IProps) => {
+const ChartLine = ({ theme, tranList, hideList, focusIdx, heightArr, maxMin, onMouseEnter, onMouseLeave }: IProps) => {
     const [refArr, setRefArr] = useState<RefObject<HTMLDivElement>[]>([]);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -57,6 +57,16 @@ const ChartLine = ({ theme, tranList, hideList, focusIdx, heightArr, onMouseEnte
             ))}
             <canvas className={styles.canvas} ref={canvasRef} width="256" height="256">
             </canvas>
+            <div className={styles.vertical}>
+                <p>{maxMin.max}</p>
+                <p>{(maxMin.max+maxMin.min)/2}</p>
+                <p>{maxMin.min}</p>
+            </div>
+            <div className={styles.des}>amount/date</div>
+            <div className={styles.horizontal}>
+                <p>{maxMin.start}</p>
+                <p>{maxMin.end}</p>
+            </div>
         </div>
     );
 };

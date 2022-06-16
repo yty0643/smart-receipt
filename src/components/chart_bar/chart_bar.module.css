@@ -3,73 +3,44 @@
     display: flex;
     align-items:flex-end;
     width: 16rem;
-    height: 16rem;
+    height: 16rem;  
     border-left: 1px solid grey;
     border-bottom: 1px solid grey;
     border-radius: 0 0 0 3px;
+    margin-left: 3rem;
+    margin-bottom: 3rem;
 }
 
-.bar{
-    flex: 1 1 auto;
-    position: relative;
-    width: 10px;
-    border: 1px solid white;
-    border-bottom: none;
-    background-color: rgb(103, 143, 243);
-    transition: all ease-in 100ms;
-    opacity: 0.7;
-}
-.bar.dark{
-    border: 1px solid rgb(38, 38, 41);
-    border-bottom: none;
-}
-.bar.hover{
-    opacity: 1;
-    border: 1px solid black;
-    border-bottom: none;
-}
-.bar.dark.hover{
-    border: 1px solid white;
-    border-bottom: none;
-}
-
-.detail{
-    z-index: 1;
+.vertical,
+.horizontal,
+.des{
     position: absolute;
     display: flex;
-    flex-direction: column;
-    bottom: 100%;
-    left: 100%;
-    width: 12rem;
-    padding: 1.5rem 1rem;
-    border: 1px solid rgb(0, 119, 255);
-    border-radius: 5px;
-    background-color: white;
-    transition: all ease-in 100ms;
-    transform: scale(0.5);
-    opacity: 0;
-    pointer-events: none;
-}
-.detail.hover{
-    transform: scale(1);
-    opacity: 1;
+    justify-content: space-between;
+    color: grey;
+    font-size: 0.8rem;
+    font-weight: 300;
 }
 
-.tag{
-    font-weight: 100;
-    font-size: 0.8rem;
-    color:rgb(32, 99, 207);
+.vertical{
+    top: 0;
+    right: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 3rem;
+    height: 100%;
+    padding-right: 0.5rem;
 }
-.title{
-    font-size: 0.8rem;
-    font-weight: 700;
-    border-bottom: 0.5px solid grey;
-    margin-bottom: 0.5rem;
+.des{
+    top: 100%;
+    right: 100%;
+    padding-right: 0.5rem;
+    padding-top: 0.2rem;
 }
-.box{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    font-weight: 100;
+.horizontal{
+    top: 100%;
+    right: 0;
+    width: 100%;
+    height: 3rem;
+    padding-top: 0.2rem;
 }

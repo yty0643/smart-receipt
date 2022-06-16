@@ -1,9 +1,7 @@
 .section{
     display: flex;
-    align-items: center;
     justify-content: center;
     width: 100%;
-    height: 40rem;
     padding: 9rem 0;
     margin-bottom: 2rem;
     background-color: white;
@@ -12,7 +10,16 @@
     background-color: rgb(38, 38, 41);
 }
 
+.contents{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 50rem;
+    padding: 0 3rem;
+}
+
 .box1{
+    flex: 1 1 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,11 +27,11 @@
 }
 
 .box2{
+    flex: 1 1 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 23rem;
 }
 
 .title,
@@ -36,29 +43,23 @@
     word-break: keep-all;
 }
 
+.title.dark,
+.subTitle.dark,
+.description.dark{
+    color: rgb(212, 219, 225);
+}
+
 .title{
     margin-bottom: 2rem;
     font-size: 2.5rem;
     font-weight: 500;
 }
-.title.dark{
-    color: white;
-}
-
 .subTitle{
     margin-bottom: 1rem;
     font-size: 1rem;
     font-weight: 300;
 }
-.subTitle.dark{
-    color: white;
-}
-
 .description{
     font-size: 0.8rem;
     font-weight: 300;
-}
-
-.description.dark{
-    color: white;
 }
