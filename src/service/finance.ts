@@ -5,7 +5,7 @@ export default class Finance{
     // 사용자 인증
     authorize() {
         const url =
-            `/smart-receipt/oauth/2.0/authorize?` +
+            `/oauth/2.0/authorize?` +
             `response_type=code&` +
             `client_id=${process.env.REACT_APP_CLIENT_ID}&` +
             `redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&` +
@@ -16,6 +16,7 @@ export default class Finance{
             `authorized_cert_yn=Y&` +
             `account_hold_auth_yn=N&` +
             `register_info=A`;
+        console.log(url);
         window.open(url, "_blank");
     };
 
