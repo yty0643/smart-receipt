@@ -27,13 +27,14 @@ ajax, axios, cors, proxy, Redux, RTK 를 다뤄보고자 프로젝트를 진행�
 
 ## 문제점
 
-## 최대 문제점
+### 최대 문제점
 
 Axios로 금융결제원API를 호출하고있는데.. local환경에서는 잘 되지만
 gh-pages를 설치하고 GitHub Pages로 호스팅된 웹에선 405 not allowed method 에러가 발생했고...
-<img width="289" alt="캡처" src="https://user-images.githubusercontent.com/80657819/174089192-be99451a-863c-420e-a21b-83433f8976bc.PNG">
 stackoverflow나 다른 개발블로그들을 참고하며 해결하려고 많은 시간을 투자했으나...
 결론은 Github Pages는 서버 측 프로그램을 지원하지 않고, 정적 웹 페이지 호스팅을 지원하기 때문에 데이터를 받아올 수 없다는 결론을 내렸다.
+
+<img width="289" alt="캡처" src="https://user-images.githubusercontent.com/80657819/174089192-be99451a-863c-420e-a21b-83433f8976bc.PNG">
 
 ### ajax, axios, proxy, cors, Redux
 
