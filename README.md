@@ -1,4 +1,4 @@
-# smart-receipt [바로가기](https://yty0643.github.io/smart-receipt/)
+# smart-receipt
 
 금융결제원 API를 통해 사용자의 계좌를 조회하고 분석하여 다양한 통계(그래프)를 제공하는 웹 서비스이다.
 
@@ -35,6 +35,8 @@ stackoverflow나 다른 개발블로그들을 참고하며 해결하려고 많�
 결론은 Github Pages는 서버 측 프로그램을 지원하지 않고, 정적 웹 페이지 호스팅을 지원하기 때문에 데이터를 받아올 수 없다는 결론을 내렸다.
 
 <img width="289" alt="캡처" src="https://user-images.githubusercontent.com/80657819/174089192-be99451a-863c-420e-a21b-83433f8976bc.PNG">
+
+AWS Amplify에 대해 공부해서 추후 웹 호스팅 할 예정입니다.
 
 ### ajax, axios, proxy, cors, Redux
 

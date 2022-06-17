@@ -9,7 +9,8 @@ const Signup = ({ finance }: { finance: Finance }) => {
     const theme = useSelector((state: RootState) => (state.theme.isActive));
 
     const onClick = () => {
-        finance.authorize();
+        alert("")
+        // finance.authorize();
     };
 
     const finLogic = (access_code: string) => {
